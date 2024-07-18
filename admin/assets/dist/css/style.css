@@ -1,0 +1,37 @@
+
+
+
+
+.user-image {
+    width: 48px; /* Chiều rộng của ảnh */
+    height: 48px; /* Chiều cao của ảnh */
+    border-radius: 50%; /* Làm tròn góc để tạo hình ảnh tròn */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị biến dạng và hiển thị đầy đủ */
+    border: 1px solid #dee2e6; /* Viền cho ảnh nếu cần thiết */
+}
+
+.info {
+    padding: 8px 10px; /* Điều chỉnh padding cho phần thông tin người dùng */
+}
+
+
+/* Đảm bảo navbar có chiều rộng 100% */
+
+
+/* Căn chỉnh các phần tử bên trái và phải */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+
+
