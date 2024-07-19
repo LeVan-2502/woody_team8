@@ -53,6 +53,19 @@ function middleware_auth_check($act) {
         exit();
     }
 }
+function middleware_auth_check_client($act) {
+    // Kiểm tra nếu $act là 'dangnhap' và người dùng đã đăng nhập
+    if ($act == 'dangnhap' && !empty($_SESSION['admin'])) {
+        header('Location: ' . BASE_URL);
+        exit();
+    }
+
+    // Kiểm tra nếu $act không phải 'dangnhap' và người dùng chưa đăng nhập
+    if ($act != 'dangnhap' && empty($_SESSION['admin'])) {
+        header('Location: ' . BASE_URL . '?act=dangnhap');
+        exit();
+    }
+}
 
 // Updloadfile
 function uploadFile($file, $folderUpload){

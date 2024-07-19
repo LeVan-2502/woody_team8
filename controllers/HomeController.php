@@ -8,14 +8,24 @@ class HomeController
         $this->modelSanPham= new SanPham();
     }
    
-    public function home(){
+    public function homeXem(){
        
         require_once './views/nguoixem/home.php';
     }
+   
+    
+    public function homeDung(){
+       
+        require_once './views/nguoidung/home.php';
+    }
+   
+   
     public function xacthuc(){
        
         require_once './views/nguoidung/home.php';
     }
-    
+    public function home(){
+
+    }
  
 }

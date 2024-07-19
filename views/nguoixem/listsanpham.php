@@ -1,7 +1,4 @@
-<?php
-if(isset($_SESSION['admin'])) {
-  $admin = $_SESSION['admin'];
-} 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -476,7 +473,7 @@ if(isset($_SESSION['admin'])) {
                                     <div class="hot">Hot</div>
                                 </div>
                                 <div class="product-thumb-hover">
-                                    <a href="<?=BASE_URL. '?act=chitietsanpham&id_san_pham=${product.id}'?>">
+                                    <a href="<?=BASE_URL. '?act=chitiet-nguoixem&id_san_pham=${product.id}'?>">
                                         <img width="600" height="600" src="${product.hinh_anh}" class="post-image" alt="">
                                         <img width="600" height="600" src="${product.hinh_anh}" class="hover-image back" alt="">
                                     </a>

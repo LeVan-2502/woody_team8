@@ -1,7 +1,7 @@
 <?php
-if(isset($_SESSION['admin'])) {
-  $admin = $_SESSION['admin'];
-} 
+if (isset($_SESSION['admin'])) {
+    $admin = $_SESSION['admin'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +95,7 @@ if(isset($_SESSION['admin'])) {
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active" id="layout-grid" role="tabpanel">
                                                 <div id="dataContainer" class="products-list grid row">
-                                                    
+
                                                 </div>
                                             </div>
 
@@ -453,136 +453,125 @@ if(isset($_SESSION['admin'])) {
         <!-- Site Scripts -->
         <script src="<?= BASE_URL ?>assets/ruper/assets/js/app.js"></script>
         <!-- Code injected by live-server -->
-        <
-        <script>
+        < <script>
             const products = <?php echo $listSanPham; ?>;
 
             const pageSize = 12; // Số lượng sản phẩm trên mỗi trang
             let currentPage = 1; // Trang hiện tại
 
             function renderProducts() {
-                const start = (currentPage - 1) * pageSize;
-                const end = Math.min(start + pageSize, products.length);
-                const dataContainer = document.getElementById('dataContainer');
-                dataContainer.innerHTML = '';
+            const start = (currentPage - 1) * pageSize;
+            const end = Math.min(start + pageSize, products.length);
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = '';
 
-                for (let i = start; i < end; i++) {
-                    const product = products[i];
-                    const productElement = `
-                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                        <div class="products-entry clearfix product-wapper">
-                            <div class="products-thumb">
-                                <div class="product-lable">
-                                    <div class="hot">Hot</div>
-                                </div>
-                                <div class="product-thumb-hover">
-                                    <a href="<?=BASE_URL. '?act=chitietsanpham&id_san_pham=${product.id}'?>">
-                                        <img width="600" height="600" src="${product.hinh_anh}" class="post-image" alt="">
-                                        <img width="600" height="600" src="${product.hinh_anh}" class="hover-image back" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-button">
-                                    <div class="btn-add-to-cart" data-title="Add to cart">
-                                        <a rel="nofollow" href="#" class="product-btn button">Add to cart</a>
-                                    </div>
-                                    <div class="btn-wishlist" data-title="Wishlist">
-                                        <button class="product-btn">Add to wishlist</button>
-                                    </div>
-                                    <div class="btn-compare" data-title="Compare">
-                                        <button class="product-btn">Compare</button>
-                                    </div>
-                                    <span class="product-quickview" data-title="Quick View">
-                                        <a href="#" class="quickview quickview-button">Quick View <i class="icon-search"></i></a>
-                                    </span>
-                                </div>
+            for (let i = start; i < end; i++) { const product=products[i]; const productElement=` <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+                <div class="products-entry clearfix product-wapper">
+                    <div class="products-thumb">
+                        <div class="product-lable">
+                            <div class="hot">Hot</div>
+                        </div>
+                        <div class="product-thumb-hover">
+                            <a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=${product.id}' ?>">
+                                <img width="600" height="600" src="${product.hinh_anh}" class="post-image" alt="">
+                                <img width="600" height="600" src="${product.hinh_anh}" class="hover-image back" alt="">
+                            </a>
+                        </div>
+                        <div class="product-button">
+                            <div class="btn-add-to-cart" data-title="Add to cart">
+                                
+                                <a href="<?= BASE_URL . '?act=add-giohang&san_pham_id=${product.id}' ?>" class="added-to-cart product-btn" title="View cart" tabindex="0">View cart</a>
                             </div>
-                            <div class="products-content">
-                                <div class="contents text-center">
-                                    <h3 class="product-title"><a href="<?=BASE_URL. '?act=chitietsanpham&id_san_pham=${product.id}'?>">${product.ten_san_pham}</a></h3>
-                                    <span class="price">$${product.gia_san_pham}</span>
-                                </div>
+                            <div class="btn-wishlist" data-title="Wishlist">
+                                <button class="product-btn">Thêm vào yêu thích</button>
                             </div>
+                            <div class="btn-compare" data-title="Compare">
+                                <button class="product-btn">Compare</button>
+                            </div>
+                            <span class="product-quickview" data-title="Quick View">
+                                <a href="#" class="quickview quickview-button">Quick View <i class="icon-search"></i></a>
+                            </span>
                         </div>
                     </div>
+                    <div class="products-content">
+                        <div class="contents text-center">
+                            <h3 class="product-title"><a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=${product.id}' ?>">${product.ten_san_pham}</a></h3>
+                            <span class="price">$${product.gia_san_pham}</span>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    `;
+    dataContainer.innerHTML += productElement;
+    }
+    }
+
+    function renderPagination() {
+    const pageCount = Math.ceil(products.length / pageSize);
+    const paginationContainer = document.getElementById('page-numbers');
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= pageCount; i++) { const pageElement=` <li><a class="page-numbers ${currentPage === i ? 'active' : ''}" href="#" onclick="setPage(${i})">${i}</a></li>
         `;
-                    dataContainer.innerHTML += productElement;
-                }
+        paginationContainer.innerHTML += pageElement;
+        }
+        }
+
+        function setPage(page) {
+        currentPage = page;
+        renderProducts();
+        renderPagination();
+        }
+
+        function nextPage() {
+        const pageCount = Math.ceil(products.length / pageSize);
+        if (currentPage < pageCount) { setPage(currentPage + 1) } } function prevPage() { if (currentPage> 1) {
+            setPage(currentPage - 1);
             }
-
-            function renderPagination() {
-                const pageCount = Math.ceil(products.length / pageSize);
-                const paginationContainer = document.getElementById('page-numbers');
-                paginationContainer.innerHTML = '';
-
-                for (let i = 1; i <= pageCount; i++) {
-                    const pageElement = `
-                    <li><a class="page-numbers ${currentPage === i ? 'active' : ''}" href="#" onclick="setPage(${i})">${i}</a></li>
-                `;
-                    paginationContainer.innerHTML += pageElement;
-                }
-            }
-
-            function setPage(page) {
-                currentPage = page;
-                renderProducts();
-                renderPagination();
-            }
-
-            function nextPage() {
-                const pageCount = Math.ceil(products.length / pageSize);
-                if (currentPage < pageCount) {
-                    setPage(currentPage + 1)
-                }
-            }
-
-            function prevPage() {
-                if (currentPage > 1) {
-                    setPage(currentPage - 1);
-                }
             }
 
             // Khởi tạo trang đầu tiên khi trang được tải
             document.addEventListener('DOMContentLoaded', () => {
-                renderProducts();
-                renderPagination();
+            renderProducts();
+            renderPagination();
             });
-        </script>
-        <script>
-            // <![CDATA[  <-- For SVG support
-            if ('WebSocket' in window) {
-                (function() {
-                    function refreshCSS() {
-                        var sheets = [].slice.call(document.getElementsByTagName("link"));
-                        var head = document.getElementsByTagName("head")[0];
-                        for (var i = 0; i < sheets.length; ++i) {
-                            var elem = sheets[i];
-                            var parent = elem.parentElement || head;
-                            parent.removeChild(elem);
-                            var rel = elem.rel;
-                            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                                elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            </script>
+            <script>
+                // <![CDATA[  <-- For SVG support
+                if ('WebSocket' in window) {
+                    (function() {
+                        function refreshCSS() {
+                            var sheets = [].slice.call(document.getElementsByTagName("link"));
+                            var head = document.getElementsByTagName("head")[0];
+                            for (var i = 0; i < sheets.length; ++i) {
+                                var elem = sheets[i];
+                                var parent = elem.parentElement || head;
+                                parent.removeChild(elem);
+                                var rel = elem.rel;
+                                if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                                    var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                                    elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                                }
+                                parent.appendChild(elem);
                             }
-                            parent.appendChild(elem);
                         }
-                    }
-                    var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                    var address = protocol + window.location.host + window.location.pathname + '/ws';
-                    var socket = new WebSocket(address);
-                    socket.onmessage = function(msg) {
-                        if (msg.data == 'reload') window.location.reload();
-                        else if (msg.data == 'refreshcss') refreshCSS();
-                    };
-                    if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                        console.log('Live reload enabled.');
-                        sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                    }
-                })();
-            } else {
-                console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-            }
-            // ]]>
-        </script>
+                        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                        var address = protocol + window.location.host + window.location.pathname + '/ws';
+                        var socket = new WebSocket(address);
+                        socket.onmessage = function(msg) {
+                            if (msg.data == 'reload') window.location.reload();
+                            else if (msg.data == 'refreshcss') refreshCSS();
+                        };
+                        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                            console.log('Live reload enabled.');
+                            sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                        }
+                    })();
+                } else {
+                    console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+                }
+                // ]]>
+            </script>
 
 </body>
 
