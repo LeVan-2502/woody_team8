@@ -73,25 +73,25 @@ if (isset($_SESSION['admin'])) {
                                     <div class="card p-4 col-9 mx-auto">
                                         <div class="row my-5">
                                             <div class="col-md-4 text-center">
-                                                <img src="<?=$taiKhoan['anh_dai_dien']?>" alt="Profile Image" class="profile-img mb-3">
+                                                <img src="<?= $taiKhoan['anh_dai_dien'] ?>" alt="Profile Image" class="profile-img mb-3">
                                                 <h3></h3>
-                                               
-                                                <a class="btn btn-primary" href="<?=BASE_URL .'?act=capnhattaikhoan&id_tai_khoan='.$admin['id']?>">Cập nhật thông tin</a>
+
+                                                <a class="btn btn-primary" href="<?= BASE_URL . '?act=capnhattaikhoan&id_tai_khoan=' . $admin['id'] ?>">Cập nhật thông tin</a>
 
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
-                                                    <h3 class="card-title"><?=$taiKhoan['ho_ten']?></h3>
+                                                    <h3 class="card-title"><?= $taiKhoan['ho_ten'] ?></h3>
                                                     <p class="card-text">Product Designer based in Melbourne</p>
                                                     <hr>
                                                     <ul class="list-unstyled">
-                                                        <li><strong>Giới tính:</strong><?=$taiKhoan['gioi_tinh'] == 1 ? 'Nam' :'Nữ'?></li>
-                                                        <li><strong>Ngày sinh:</strong><?=$taiKhoan['ngay_sinh']?></li>
-                                                        <li><strong>Địa chỉ:</strong> <?=$taiKhoan['dia_chi']?></li>
-                                                        <li><strong>Email:</strong> <?=$taiKhoan['email']?></li>
-                                                        <li><strong>Phone:</strong><?=$taiKhoan['so_dien_thoai']?></li>
-                                                        
-                                                       
+                                                        <li><strong>Giới tính:</strong><?= $taiKhoan['gioi_tinh'] == 1 ? 'Nam' : 'Nữ' ?></li>
+                                                        <li><strong>Ngày sinh:</strong><?= $taiKhoan['ngay_sinh'] ?></li>
+                                                        <li><strong>Địa chỉ:</strong> <?= $taiKhoan['dia_chi'] ?></li>
+                                                        <li><strong>Email:</strong> <?= $taiKhoan['email'] ?></li>
+                                                        <li><strong>Phone:</strong><?= $taiKhoan['so_dien_thoai'] ?></li>
+
+
                                                     </ul>
 
                                                 </div>
@@ -108,24 +108,32 @@ if (isset($_SESSION['admin'])) {
                                                                 <thead>
                                                                     <tr>
                                                                         <th>STT</th>
-                                                                        <th>Mã đơn</th>
+
                                                                         <th>Ngày đặt</th>
                                                                         <th>Trạng thái</th>
+                                                                        <th>Phương thức thanh toán</th>
                                                                         <th>Tổng tiền</th>
                                                                         <th>Actions</th>
+
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach($donHang as $key=>$dh ):?>
+                                                                    <?php foreach ($donHang as $key => $dh) : ?>
                                                                         <tr>
-                                                                            <td><?=$key+1?></td>
-                                                                            <td><?=$dh['ma_don_hang']?></td>
-                                                                            <td><?=$dh['ngay_dat']?></td>
-                                                                            <td><?=$dh['ten_trang_thai']?></td>
-                                                                            <td><?=$dh['tong_tien']?></td>
+                                                                            <td><?= $key + 1 ?></td>
+
+                                                                            <td><?= $dh['ngay_dat'] ?></td>
+                                                                            <td> <?php if ($dh['trang_thai_id'] == 4) : ?>
+                                                                                    <span class="badge badge-success"><?= htmlspecialchars($dh['ten_trang_thai']) ?></span>
+                                                                                <?php else : ?>
+                                                                                    <span class="badge badge-danger"><?= htmlspecialchars($dh['ten_trang_thai']) ?></span>
+                                                                                <?php endif; ?>
+                                                                            </td>
+                                                                            <td><?= $dh['ten_phuong_thuc'] ?></td>
+                                                                            <td><?= $dh['tong_tien'] ?></td>
                                                                             <td>
-                                                                                <a class="btn btn-success" href="<?= BASE_URL . '?act=chitiet-donhang&id_don_hang=' . $dh['id']?>">Chi tiết</a>
-                                                                                <a class="btn btn-danger" href="<?= BASE_URL . '?act=xoa-donhang&id_don_hang=' . $dh['id']?>">Xóa</a>
+                                                                                <a class="btn btn-success" href="<?= BASE_URL . '?act=chitiet-donhang&id_don_hang=' . $dh['id'] ?>">Chi tiết</a>
+                                                                                <a class="btn btn-danger" href="<?= BASE_URL . '?act=xoa-donhang&id_don_hang=' . $dh['id'] ?>">Xóa</a>
                                                                             </td>
                                                                         </tr>
 
@@ -135,7 +143,7 @@ if (isset($_SESSION['admin'])) {
                                                             </table>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>

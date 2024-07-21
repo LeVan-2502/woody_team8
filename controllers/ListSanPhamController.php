@@ -17,4 +17,5 @@ class ListSanPhamController
         $listSanPham = json_encode($listSanPham);
         require_once './views/nguoixem/listsanpham.php';
     }
+    
 }

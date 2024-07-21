@@ -480,7 +480,7 @@ if (isset($_SESSION['admin'])) {
                         <div class="product-button">
                             <div class="btn-add-to-cart" data-title="Add to cart">
                                 
-                                <a href="<?= BASE_URL . '?act=add-giohang&san_pham_id=${product.id}' ?>" class="added-to-cart product-btn" title="View cart" tabindex="0">View cart</a>
+                                <a href="<?= BASE_URL.'?act=add-giohang&san_pham_id=${product.id}' ?>" class="added-to-cart product-btn" title="View cart" tabindex="0">View cart</a>
                             </div>
                             <div class="btn-wishlist" data-title="Wishlist">
                                 <button class="product-btn">Thêm vào yêu thích</button>

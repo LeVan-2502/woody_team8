@@ -69,6 +69,21 @@ class ChiTietSanPham
             $this->debug($e);
         }
     }
+    public function updateLuotView($id){
+        try {
+            $sql = 'UPDATE san_phams 
+                    SET luot_xem=luot_xem+1 
+                    WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+
+            ]);
+            return true;
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
 
     private function debug($e)
     {

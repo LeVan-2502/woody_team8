@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
+    $listSPGioHang=[];
+   
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,12 +67,12 @@
                                 <div class="shop-cart">
                                     <div class="row">
                                         <div class="col-xl-8 col-lg-12 col-md-12 col-12">
-                                            <form class="cart-form" action="#" method="post">
+                                            <form class="cart-form" action="<?= BASE_URL . '?act=capnhat-giohang' ?>" method="post">
                                                 <div class="table-responsive">
                                                     <table class="cart-items table" cellspacing="0">
                                                         <thead>
                                                             <tr>
-                                                            <th class="product-thumbnail">ID sản phẩm</th>
+                                                                <th class="product-thumbnail">ID sản phẩm</th>
                                                                 <th class="product-thumbnail">Hình ảnh</th>
                                                                 <th class="product-price">Giá</th>
                                                                 <th class="product-quantity">Số lượng</th>
@@ -74,10 +81,13 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                    
-                                                            <?php foreach ($listSPGioHang as $sp) : $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];?>
+                                                            <?php $to_tal=0;
+                                                            foreach ($listSPGioHang as $sp) : $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];
+                                                                    $to_tal+=$tong_tien;?>
+                                                                
+                                                                <input type="hidden" name="id[]" value="<?= $sp['id'] ?>">
                                                                 <tr class="cart-item">
-                                                                <td class="product-price">
+                                                                    <td class="product-price">
                                                                         <span class="price"><?= $sp['id'] ?></span>
                                                                     </td>
                                                                     <td class="product-thumbnail">
@@ -94,18 +104,18 @@
                                                                     <td class="product-quantity">
                                                                         <div class="quantity">
                                                                             <button type="button" class="minus">-</button>
-                                                                            <input type="number" class="qty" step="1" min="0" max="" name="quantity" value="2" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
+                                                                            <input type="number" class="qty" name="so_luong[]" data-product-id="<?= $sp['id'] ?>" step="1" min="0" max="" value="<?= $sp['so_luong'] ?>" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
                                                                             <button type="button" class="plus">+</button>
                                                                         </div>
                                                                     </td>
                                                                     <td class="product-subtotal">
                                                                         <span>$<?= number_format($tong_tien, 2) ?></span>
                                                                     </td>
-                                                                    <td >
-                                                                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?=BASE_URL. '?act=del-giohang&san_pham_id='.$sp['id']?>">Xóa</a>
+                                                                    <td>
+                                                                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL . '?act=del-giohang&san_pham_id=' . $sp['id'] ?>">Xóa</a>
                                                                     </td>
-                                                                </tr>
-                                                            <?php endforeach ?>
+                                                                    </tr>
+                                                            <?php endforeach;$_SESSION['to_tal'] = $to_tal?>
                                                             <tr>
                                                                 <td colspan="6" class="actions">
                                                                     <div class="bottom-cart">
@@ -115,7 +125,7 @@
                                                                         </div>
                                                                         <h2>
                                                                             <a class="button btn btn-info" href="<?= BASE_URL . '?act=listsanpham' ?>">
-                                                                            Tiếp tục mua hàng
+                                                                                Tiếp tục mua hàng
                                                                             </a>
                                                                         </h2>
                                                                         <button type="submit" name="update_cart" class="button btn btn-success" value="Update cart">Cập nhật giỏ hàng</button>
@@ -126,14 +136,15 @@
                                                     </table>
                                                 </div>
                                             </form>
+
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-12">
                                             <div class="cart-totals">
-                                                <h2>Cart totals</h2>
+                                                <h2>Đơn hàng của bạn</h2>
                                                 <div>
                                                     <div class="cart-subtotal">
-                                                        <div class="title">Subtotal</div>
-                                                        <div><span>$480.00</span></div>
+                                                        <div class="title">Tổng giá trị</div>
+                                                        <div><span>$<?= number_format($to_tal, 2)?></span></div>
                                                     </div>
                                                     <div class="shipping-totals">
                                                         <div class="title">Shipping</div>
@@ -157,8 +168,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="proceed-to-checkout">
-                                                    <a href="shop-checkout.html" class="btn btn-info button ">
-                                                        Proceed to checkout
+                                                    <a href="<?=BASE_URL . '?act=checkout-giohang'?>" class="btn btn-info button ">
+                                                        Tiếp tục thanh toán
                                                     </a>
                                                 </div>
                                             </div>
@@ -238,6 +249,25 @@
         } else {
             console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
         }
+
+        $('.qty').on('change', function() {
+            var qty = $(this).val(); // Lấy giá trị số lượng mới
+            var productId = $(this).data('product-id'); // Lấy ID sản phẩm
+
+            // Gửi yêu cầu AJAX tới update_quantity.php
+            $.ajax({
+                url: 'update_quantity.php', // URL của tệp PHP xử lý yêu cầu
+                type: 'POST', // Phương thức gửi yêu cầu
+                data: {
+                    san_pham_id: productId, // Dữ liệu ID sản phẩm
+                    so_luong: qty // Dữ liệu số lượng mới
+                },
+                success: function(response) {
+                    // Xử lý phản hồi từ PHP (có thể cập nhật giao diện nếu cần)
+                    console.log(response); // In phản hồi ra console
+                }
+            });
+        });
         // ]]>
     </script>
 </body>

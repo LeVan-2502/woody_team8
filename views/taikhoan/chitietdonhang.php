@@ -38,58 +38,74 @@ if (isset($_SESSION['admin'])) {
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;display=swap" rel="stylesheet">
     <style>
         body.hold-transition.login-page {
-            background: url('https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
+
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+        .container {
+            position: relative;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f00;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 16px;
+        }
+        .close-icon:hover {
+            background-color: #c00;
+        }
     </style>
 </head>
 
 <body class="hold-transition login-page ">
 
-    <div id="" class="container">
-          <div class="">
-                <div class="card">
-
-                    
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ảnh sản phâm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Giá sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($chiTietDonHang as $key => $dh) : ?>
-                                    <tr>
-                                        <td><?= $key + 1 ?></td>
-                                        <td>
-                                            <img width="100px" src="<?=BASE_URL.$dh['hinh_anh']?>" alt="">
-                                        </td>
-                                        <td><?= $dh['ten_san_pham'] ?></td>
-                                        <td><?= $dh['gia_san_pham'] ?></td>
-                                        <td><?= $dh['so_luong'] ?></td>
-                                        
-                                        <td>
-                                            <a class="btn btn-danger" href="<?= BASE_URL . '?act=xoa-sanphamdonhang&id_san_pham=' . $dh['id'] ?>">Xóa</a>
-                                        </td>
-                                    </tr>
-
-                                <?php endforeach ?>
-                            </tbody>
-
-                        </table>
-                    
-            </div><!-- #primary -->
-        </div><!-- #main-content -->
+    <div id="product-details" class="container">
+        <div class="close-icon" onclick="closeContainer()">✖</div>
+        <div class="">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá sản phẩm</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($chiTietDonHang as $key => $dh) : ?>
+                        <tr>
+                            <td><?= $key + 1 ?></td>
+                            <td>
+                                <img width="100px" src="<?= BASE_URL . $dh['hinh_anh'] ?>" alt="">
+                            </td>
+                            <td><?= $dh['ten_san_pham'] ?></td>
+                            <td><?= $dh['gia_san_pham'] ?></td>
+                            <td><?= $dh['so_luong'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+            <a href="javascript:history.back()">Trở về trang trước</a>
+        </div>
     </div>
 
 
@@ -111,6 +127,12 @@ if (isset($_SESSION['admin'])) {
 
     <!-- Site Scripts -->
     <script src="<?= BASE_URL ?>assets/ruper/assets/js/app.js"></script>
+
+    <script>
+        function closeContainer() {
+            document.getElementById('product-details').style.display = 'none';
+        }
+    </script>
     <!-- Code injected by live-server -->
     <script>
         // <![CDATA[  <-- For SVG support

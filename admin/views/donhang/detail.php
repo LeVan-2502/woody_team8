@@ -30,10 +30,10 @@
                             <div class="col-sm-4 invoice-col">
                                 <h4 class="text-primary fw-bold">TO</h4>
                                 <address>
-                                    <strong><?= $donHang['ten_nguoi_nhan'] ?></strong><br>
-                                    <strong>SĐT </strong><?= $donHang['sdt_nguoi_nhan'] ?><br>
-                                    <strong>Email </strong><?= $donHang['email_nguoi_nhan'] ?><br>
-                                    <strong>Địa chỉ </strong><?= $donHang['dia_chi_nguoi_nhan'] ?><br>
+                                    <strong><?= $dh['ten_nguoi_nhan'] ?></strong><br>
+                                    <strong>SĐT </strong><?= $dh['sdt_nguoi_nhan'] ?><br>
+                                    <strong>Email </strong><?= $dh['email_nguoi_nhan'] ?><br>
+                                    <strong>Địa chỉ </strong><?= $dh['dia_chi_nguoi_nhan'] ?><br>
 
                                 </address>
                             </div>
@@ -42,8 +42,8 @@
                                 <h4 class="text-primary fw-bold">THÔNG TIN ĐƠN HÀNG</h4>
                                 <address>
 
-                                    <strong>Mã đơn hàng </strong><?= $donHang['ma_don_hang'] ?><br>
-                                    <label class="" for="">Trạng thái hiện tại</label><span class=" ml-1 badge badge-danger"><?= $donHang['ten_trang_thai'] ?></span>
+                                    <strong>Phương thức thanh toán : </strong><?= $dh['ten_phuong_thuc'] ?><br>
+                                    <label class="" for="">Trạng thái hiện tại</label><span class=" ml-1 badge badge-danger"><?= $dh['ten_trang_thai'] ?></span>
                                 </address>
 
                             </div>
@@ -60,7 +60,7 @@
                             <div class="col-12 p-3 table-responsive">
 
                                 <form action="<?= BASE_URL_ADMIN ?>?act=sua-chitietdonhang" method="POST">
-                                    <input type="text" name="don_hang_id" value="<?= $donHang['don_hang_id'] ?>" hidden>
+                                    <input type="text" name="don_hang_id" value="<?=$id_don_hang ?>" hidden>
 
                                     <div class="row">
                                         <div class="form-group col-8">

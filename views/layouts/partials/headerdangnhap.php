@@ -205,51 +205,9 @@ if (isset($_SESSION['admin'])) {
                                 <div class="ruper-topcart dropdown light">
                                     <div class="dropdown mini-cart top-cart">
                                         <div class="remove-cart-shadow"></div>
-                                        <a class="dropdown-toggle cart-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle cart-icon" href="<?=BASE_URL .'?act=list-giohang'?>" role="button" aria-haspopup="true" aria-expanded="false">
                                             <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div>
                                         </a>
-                                        <div class="dropdown-menu cart-popup">
-                                            <div class="cart-empty-wrap">
-                                                <ul class="cart-list">
-                                                    <li class="empty">
-                                                        <span>No products in the cart.</span>
-                                                        <a class="go-shop" href="shop-grid-left.html">GO TO SHOP<i aria-hidden="true" class="arrow_right"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-list-wrap">
-                                                <ul class="cart-list ">
-                                                    <li class="mini-cart-item">
-                                                        <a href="#" class="remove" title="Remove this item"><i class="icon_close"></i></a>
-                                                        <a href="shop-details.html" class="product-image"><img width="600" height="600" src="<?= BASE_URL ?>assets/ruper/media/product/3.jpg" alt=""></a>
-                                                        <a href="shop-details.html" class="product-name">Chair Oak Matt Lacquered</a>
-                                                        <div class="quantity">Qty: 1</div>
-                                                        <div class="price">$150.00</div>
-                                                    </li>
-                                                    <li class="mini-cart-item">
-                                                        <a href="#" class="remove" title="Remove this item"><i class="icon_close"></i></a>
-                                                        <a href="shop-details.html" class="product-image"><img width="600" height="600" src="<?= BASE_URL ?>assets/ruper/media/product/1.jpg" alt=""></a>
-                                                        <a href="shop-details.html" class="product-name">Zunkel Schwarz</a>
-                                                        <div class="quantity">Qty: 1</div>
-                                                        <div class="price">$100.00</div>
-                                                    </li>
-                                                </ul>
-                                                <div class="total-cart">
-                                                    <div class="title-total">Total: </div>
-                                                    <div class="total-price"><span>$100.00</span></div>
-                                                </div>
-                                                <div class="free-ship">
-                                                    <div class="title-ship">Khi mua <strong>$400</strong> bạn sẽ được <strong>Miễn phí giao hàng</strong></div>
-                                                    <div class="total-percent">
-                                                        <div class="percent" style="width:20%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="buttons">
-                                                    <a href="shop-cart.html" class="button btn view-cart btn-primary">Xem giỏ hàng</a>
-                                                    <a href="shop-checkout.html" class="button btn checkout btn-default">Thanh toán</a>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

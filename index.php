@@ -22,6 +22,7 @@ require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
 require_once './models/ChiTietGioHang.php';
 
+
 // Route
 $act = $_GET['act'] ?? '/';
 
@@ -50,7 +51,10 @@ match ($act) {
 
     'add-giohang' => (new GioHangController())->themGioHang(),
     'list-giohang' => (new GioHangController())->listGioHang(),
-    'inc-giohang' => (new GioHangController())->tangSoLuong(),
+    'capnhat-giohang' => (new GioHangController())->capNhatGioHang(),
     'dec-giohang' => (new GioHangController())->giamSoLuong(),
     'del-giohang' => (new GioHangController())->xoaGioHang(),
+    'checkout-giohang' => (new GioHangController())->formCheckoutGioHang(),
+    'checkout-success' => (new GioHangController())->checkoutSuccess(),
+    
 };

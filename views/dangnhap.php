@@ -38,21 +38,10 @@
 	<div id="page" class="hfeed page-wrapper">
 		<?php require_once './views/layouts/partials/header.php' ?>
 
-		<div id="site-main" class="site-main">
+		<div id="site-main" class="site-main mt-4">
 			<div id="main-content" class="main-content">
 				<div id="primary" class="content-area">
-					<div id="title" class="page-title">
-						<div class="section-container">
-							<div class="content-title-heading">
-								<h1 class="text-title-heading">
-									Login / Register
-								</h1>
-							</div>
-							<div class="breadcrumbs">
-								<a href="index.html">Home</a><span class="delimiter"></span>Login / Register
-							</div>
-						</div>
-					</div>
+					
 
 					<div id="content" class="site-content" role="main">
 						<div class="section-padding">

@@ -16,35 +16,50 @@ class AdminDonHangController
     }
     public function formDetailDonHang()
     {
-        $id = $_GET['id_don_hang'];
-
-        $trangThai = $this->modelDonHang->getAllTrangThai();
-        $donHang=$this->modelDonHang->getDetailDonHang($id);
-       
-        $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id);
+        $id_don_hang = $_GET['id_don_hang'];
         
+        $trangThai = $this->modelDonHang->getAllTrangThai();
+       
+        $dh =$this->modelDonHang->getDonHang($id_don_hang);
+       
+        $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id_don_hang);
+    
         $view = 'donhang/detail';
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }
     public function postDetailDonHang()
     {
-        
-        $id = $_POST['don_hang_id'];
-        $trang_thai_id = $_POST['trang_thai_id'];
-      
-        if(empty($trang_thai_id)){
-            $donhang=$this->modelDonHang->getDetailDonHang($id);
-            $trang_thai_id=$donhang['trang_thai_id'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['don_hang_id'] ?? null;
+            $trang_thai_id = $_POST['trang_thai_id'] ?? null;
+             
+            if ($id && $trang_thai_id) {
+                // Cập nhật trạng thái đơn hàng
+                $this->modelDonHang->updateTrangThaiDonHang($id, $trang_thai_id);
+    
+                // Lấy thông tin sản phẩm trong đơn hàng
+                $sanPhamDonHang = $this->modelDonHang->getSanPhamDonHang($id);
+    
+                // Kiểm tra kết quả truy vấn
+                if ($sanPhamDonHang) {
+                    $sanPhamDonHang['trang_thai_id'] = $trang_thai_id;
+                } else {
+                    // Xử lý khi không tìm thấy sản phẩm trong đơn hàng
+                    // Bạn có thể thiết lập một thông báo lỗi hoặc xử lý theo cách khác
+                    echo 'Không tìm thấy sản phẩm trong đơn hàng.';
+                    return;
+                }
+    
+                // Chuyển hướng tới trang chi tiết đơn hàng
+                header('Location: ' . BASE_URL_ADMIN . '?act=form-chitietdonhang&id_don_hang=' . $id);
+                exit();
+            } else {
+                // Xử lý khi dữ liệu không hợp lệ
+                echo 'Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.';
+            }
         }
-
-        
-        $donhang=$this->modelDonHang->updateTrangThaiDonHang($id, $trang_thai_id);
-
-        $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id);
-       
-        $sanPhamDonHang['trang_thai_id'] = $trang_thai_id;
-        header('Location: ' . BASE_URL_ADMIN . '?act=form-chitietdonhang&id_don_hang='.$id);
-        exit();
+    }
+    
     }
     
     // public function postThemDonHang()
@@ -114,4 +129,4 @@ class AdminDonHangController
 
    
     
-}
+
