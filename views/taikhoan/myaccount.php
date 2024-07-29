@@ -1,6 +1,6 @@
 <?php
-if (isset($_SESSION['admin'])) {
-    $admin = $_SESSION['admin'];
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
 } ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,7 @@ if (isset($_SESSION['admin'])) {
                                                 <img src="<?= $taiKhoan['anh_dai_dien'] ?>" alt="Profile Image" class="profile-img mb-3">
                                                 <h3></h3>
 
-                                                <a class="btn btn-primary" href="<?= BASE_URL . '?act=capnhattaikhoan&id_tai_khoan=' . $admin['id'] ?>">Cập nhật thông tin</a>
+                                                <a class="btn btn-primary" href="<?= BASE_URL . '?act=capnhattaikhoan&id_tai_khoan=' . $user['id'] ?>">Cập nhật thông tin</a>
 
                                             </div>
                                             <div class="col-md-8">
@@ -99,6 +99,17 @@ if (isset($_SESSION['admin'])) {
                                         </div>
                                         <hr>
                                         <div class="row mt-4">
+                                            <div class="col-12">
+                                                <?php if (isset($_SESSION['thongbao'])) : ?>
+                                                    <div class="alert alert-<?= $_SESSION['thongbao']['type'] ?> alert-dismissible fade show" role="alert">
+                                                        <?= $_SESSION['thongbao']['message'] ?>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <?php unset($_SESSION['thongbao']); ?>
+                                                <?php endif ?>
+                                            </div>
                                             <div class="col-12">
                                                 <h4>Lịch sử mua hàng</h4>
                                                 <div class="tab-content" id="myTabContent">
@@ -123,21 +134,33 @@ if (isset($_SESSION['admin'])) {
                                                                             <td><?= $key + 1 ?></td>
 
                                                                             <td><?= $dh['ngay_dat'] ?></td>
-                                                                            <td> <?php if ($dh['trang_thai_id'] == 4) : ?>
-                                                                                    <span class="badge badge-success"><?= htmlspecialchars($dh['ten_trang_thai']) ?></span>
-                                                                                <?php else : ?>
-                                                                                    <span class="badge badge-danger"><?= htmlspecialchars($dh['ten_trang_thai']) ?></span>
+                                                                            <td> <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>
+                                                                                    <?= hienThiTrangThai($dh['trang_thai_id'], $dh['ten_trang_thai']); ?>
                                                                                 <?php endif; ?>
                                                                             </td>
                                                                             <td><?= $dh['ten_phuong_thuc'] ?></td>
                                                                             <td><?= $dh['tong_tien'] ?></td>
                                                                             <td>
                                                                                 <a class="btn btn-success" href="<?= BASE_URL . '?act=chitiet-donhang&id_don_hang=' . $dh['id'] ?>">Chi tiết</a>
-                                                                                <a class="btn btn-danger" href="<?= BASE_URL . '?act=xoa-donhang&id_don_hang=' . $dh['id'] ?>">Xóa</a>
+                                                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin đơn hàng này ko?')" class="btn btn-danger" href="<?= BASE_URL . '?act=delete_itemlichdudonhang&id_don_hang=' . $dh['id'] ?>">Xóa</a>
                                                                             </td>
                                                                         </tr>
 
                                                                     <?php endforeach ?>
+                                                                    <?php
+                                                                    function hienThiTrangThai($trang_thai_id, $ten_trang_thai)
+                                                                    {
+                                                                        $mauTrangThai = [
+                                                                            0 => 'badge-primary',  // Đặt hàng thành công - Màu xanh dương
+                                                                            1 => 'badge-info',     // Đang chuẩn bị hàng - Màu xanh nhạt
+                                                                            2 => 'badge-warning',  // Đang giao hàng - Màu vàng
+                                                                            3 => 'badge-success',  // Giao hàng thành công - Màu xanh lá
+                                                                            4 => 'badge-danger'    // Đơn hàng bị hủy - Màu đỏ
+                                                                        ];
+                                                                        $mau = isset($mauTrangThai[$trang_thai_id]) ? $mauTrangThai[$trang_thai_id] : 'badge-secondary';
+                                                                        return "<span class='badge $mau'>" . htmlspecialchars($ten_trang_thai) . "</span>";
+                                                                    }
+                                                                    ?>
                                                                 </tbody>
 
                                                             </table>

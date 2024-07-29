@@ -10,30 +10,42 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/DashboardController.php';
 require_once './controllers/AdminDonhangController.php';
-require_once './controllers/AdminQuanTriVienController.php';
+require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminXacThucController.php';
 require_once './controllers/AdminBinhLuanController.php';
+require_once './controllers/AdminBaiVietController.php';
+require_once './controllers/AdminTagController.php';
+require_once './controllers/AdminKhuyenMaiController.php';
+require_once './controllers/AdminSliderBannerController.php';
+require_once './controllers/AdminLienHeController.php';
 // require_once './controller/AdminSanPhamController.php';
 
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
-require_once './models/AdminQuanTriVien.php';
+require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminXacThuc.php';
 require_once './models/AdminBinhLuan.php';
+require_once './models/AdminBaiViet.php';
+require_once './models/AdminTag.php';
+require_once './models/AdminKhuyenMai.php';
+require_once './models/AdminSliderBanner.php';
+require_once './models/AdminLienHe.php';
 
 // require_once './model/AdminDanhMuc.php';
 
 
 // Route
 $act = $_GET['act'] ?? '/';
-middleware_auth_check($act);
+middleware_auth_check_admin($act);
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
     // Trang chủ
     '/'=>(new DashboardController())->dashboard(),
+
+    'lien-he' =>(new AdminLienHeController())->danhSachLienHe(),
 
     'danhmuc' =>(new AdminDanhMucController())->danhSachDanhMuc(),
     'them-danhmuc' =>(new AdminDanhMucController())->postThemDanhMuc(),
@@ -52,16 +64,49 @@ match ($act) {
     
     'donhang' =>(new AdminDonHangController())->danhSachDonHang(),
     'form-chitietdonhang' =>(new AdminDonHangController())->formDetailDonHang(),
-    'sua-chitietdonhang' =>(new AdminDonHangController())->postDetailDonHang(),
+    'sua-chitietdonhang' =>(new AdminDonHangController())->thayDoiTrangThai(),
     
-    'quantrivien' =>(new AdminQuanTriVienController())->danhSachQuanTriVien(),
-    'them-quantrivien' =>(new AdminQuanTriVienController())->postThemQuanTriVien(),
-    'form-them-quantrivien' =>(new AdminQuanTriVienController())->formThemQuanTriVien(),
-    'sua-quantrivien' =>(new AdminQuanTriVienController())->postSuaQuanTriVien(),
-    'form-sua-quantrivien' =>(new AdminQuanTriVienController())->formSuaQuanTriVien(),
-    'xoa-quantrivien' =>(new AdminQuanTriVienController())->deleteQuanTriVien(),
-    'chitiet-quantrivien' =>(new AdminQuanTriVienController())->showQuanTriVien(),
+    'quantrivien' =>(new AdminTaiKhoanController())->danhSachQuanTriVien(),
+    'khachhang' =>(new AdminTaiKhoanController())->danhSachKhachHang(),
+    'them-taikhoan' =>(new AdminTaiKhoanController())->postThemTaiKhoan(),
+    'form-them-taikhoan' =>(new AdminTaiKhoanController())->formThemTaiKhoan(),
+    'sua-taikhoan' =>(new AdminTaiKhoanController())->postSuaTaiKhoan(),
+    'form-sua-taikhoan' =>(new AdminTaiKhoanController())->formSuaTaiKhoan(),
+    'xoa-taikhoan' =>(new AdminTaiKhoanController())->deleteTaiKhoan(),
+    'chitiet-taikhoan' =>(new AdminTaiKhoanController())->showTaiKhoan(),
+    'danhsach-donhang' =>(new AdminTaiKhoanController())->danhSachDonHang(),
 
+    'tag' =>(new AdminTagController())->danhSachTag(),
+    'them-tag' =>(new AdminTagController())->postThemTag(),
+    'form-them-tag' =>(new AdminTagController())->formThemTag(),
+    'sua-tag' =>(new AdminTagController())->postSuaTag(),
+    'form-sua-tag' =>(new AdminTagController())->formSuaTag(),
+    'xoa-tag' =>(new AdminTagController())->deleteTag(),
+    
+    
+    'baiviet' =>(new AdminBaiVietController())->danhSachBaiViet(),
+    'them-baiviet' =>(new AdminBaiVietController())->postThemBaiViet(),
+    'form-them-baiviet' =>(new AdminBaiVietController())->formThemBaiViet(),
+    'sua-baiviet' =>(new AdminBaiVietController())->postSuaBaiViet(),
+    'form-sua-baiviet' =>(new AdminBaiVietController())->formSuaBaiViet(),
+    'xoa-baiviet' =>(new AdminBaiVietController())->deleteBaiViet(),
+   
+
+    'khuyenmai' =>(new AdminKhuyenMaiController())->danhSachKhuyenMai(),
+    'them-khuyenmai' =>(new AdminKhuyenMaiController())->postThemKhuyenMai(),
+    'form-them-khuyenmai' =>(new AdminKhuyenMaiController())->formThemKhuyenMai(),
+    'sua-khuyenmai' =>(new AdminKhuyenMaiController())->postSuaKhuyenMai(),
+    'form-sua-khuyenmai' =>(new AdminKhuyenMaiController())->formSuaKhuyenMai(),
+    'xoa-khuyenmai' =>(new AdminKhuyenMaiController())->deleteKhuyenMai(),
+    
+    'listslider' =>(new AdminSliderBannerController())->danhSachSlider(),
+    'listbanner' =>(new AdminSliderBannerController())->danhSachBanner(),
+    'them-sliderbanner' =>(new AdminSliderBannerController())->postThemSliderBanner(),
+    'form-them-sliderbanner' =>(new AdminSliderBannerController())->formThemSliderBanner(),
+    'sua-sliderbanner' =>(new AdminSliderBannerController())->postSuaSliderBanner(),
+    'form-sua-sliderbanner' =>(new AdminSliderBannerController())->formSuaSliderBanner(),
+    'xoa-sliderbanner' =>(new AdminSliderBannerController())->deleteSliderBanner(),
+   
     'binhluan' =>(new AdminBinhLuanController())->danhSachBinhLuan(),
     'sua-chitietbinhluan' =>(new AdminBinhLuanController())->updateTrangThaiBinhLuan(),
    

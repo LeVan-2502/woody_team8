@@ -40,6 +40,7 @@ class AdminBinhLuanController
         $trang_thai = 0;
     }
 
+    
     $this->modelBinhLuan->updateTrangThaiBinhLuan($id, $trang_thai);
 
     $binhLuan['trang_thai'] = $trang_thai;

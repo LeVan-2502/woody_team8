@@ -1,10 +1,3 @@
-<?php
-if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
-    $listSPGioHang=[];
-   
-    
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +32,11 @@ if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;display=swap" rel="stylesheet">
+    <style>
+        .form-control {
+            border: 2px solid red;
+        }
+    </style>
 </head>
 
 <body class="shop">
@@ -81,10 +79,14 @@ if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php $to_tal=0;
-                                                            foreach ($listSPGioHang as $sp) : $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];
-                                                                    $to_tal+=$tong_tien;?>
-                                                                
+                                                            <?php $to_tal = 0;
+                                                            foreach ($listSPGioHang as $sp) :
+                                                                $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];
+                                                                $to_tal += $tong_tien;
+
+
+                                                            ?>
+
                                                                 <input type="hidden" name="id[]" value="<?= $sp['id'] ?>">
                                                                 <tr class="cart-item">
                                                                     <td class="product-price">
@@ -114,14 +116,22 @@ if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
                                                                     <td>
                                                                         <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL . '?act=del-giohang&san_pham_id=' . $sp['id'] ?>">Xóa</a>
                                                                     </td>
-                                                                    </tr>
-                                                            <?php endforeach;$_SESSION['to_tal'] = $to_tal?>
+                                                                </tr>
+                                                            <?php endforeach;
+                                                            $_SESSION['to_tal'] = $to_tal ?>
                                                             <tr>
                                                                 <td colspan="6" class="actions">
                                                                     <div class="bottom-cart">
+
                                                                         <div class="coupon">
-                                                                            <input type="text" name="coupon_code" class="input-text" id="coupon-code" value="" placeholder="Coupon code">
-                                                                            <button type="submit" name="apply_coupon" class="button" value="Apply coupon">Nhập khuyến mãi</button>
+
+                                                                            <select name="khuyen_mai_id" id="khuyen_mai_id" class="form-control">
+                                                                                <option selected disabled value=""> --- Chọn mã khuyến mãi ---</option>
+                                                                                <?php foreach ($listKhuyenMai as $km) : ?>
+                                                                                    <option <?= isset($listKhuyenMai['khuyen_mai_id']) && $listKhuyenMai['khuyen_mai_id'] == $khuyen['id'] ? 'selected' : '' ?> value="<?= $km['id'] ?>"><strong><?= $km['ten_khuyen_mai'] ?></strong></option>
+                                                                                <?php endforeach ?>
+                                                                            </select>
+
                                                                         </div>
                                                                         <h2>
                                                                             <a class="button btn btn-info" href="<?= BASE_URL . '?act=listsanpham' ?>">
@@ -144,56 +154,73 @@ if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
                                                 <div>
                                                     <div class="cart-subtotal">
                                                         <div class="title">Tổng giá trị</div>
-                                                        <div><span>$<?= number_format($to_tal, 2)?></span></div>
+                                                        <div><span><?= number_format($to_tal) ?> VND</span></div>
                                                     </div>
-                                                    <div class="shipping-totals">
-                                                        <div class="title">Shipping</div>
-                                                        <div>
-                                                            <ul class="shipping-methods custom-radio">
-                                                                <li>
-                                                                    <input type="radio" name="shipping_method" data-index="0" value="free_shipping" class="shipping_method" checked="checked"><label>Free shipping</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input type="radio" name="shipping_method" data-index="0" value="flat_rate" class="shipping_method"><label>Flat rate</label>
-                                                                </li>
-                                                            </ul>
-                                                            <p class="shipping-desc">
-                                                                Shipping options will be updated during checkout.
-                                                            </p>
-                                                        </div>
+                                                    <div class="cart-subtotal">
+                                                        <div class="title">Phí giao hàng</div>
+                                                        <div><span><?= number_format(30000) ?> VND</span></div>
                                                     </div>
-                                                    <div class="order-total">
-                                                        <div class="title">Total</div>
-                                                        <div><span>$480.00</span></div>
+                                                    <div class="cart-subtotal">
+                                                        <div class="title">Mã giảm giá đã chọn</div>
+                                                        <button class="btn btn-danger">
+                                                            <?php if($_SESSION['cart']==[]){
+                                                                echo 'Bạn chưa chọn';
+                                                            }
+                                                            else{
+                                                                echo $_SESSION['thong_tin_gio_hang']['ten_khuyen_mai'];
+                                                            } ?>
+                                                        </button>
+
                                                     </div>
+
+                                                </div>
+
+                                                <?php
+                                                
+                                                // Khai báo biến phí giao hàng
+                                                $shipping_fee = 30000;
+                                                // Tính toán tổng tiền sau khi áp dụng mã giảm giá
+                                                if($gioHang['khuyen_mai_id']==0){
+                                                    $gioHang['gia_trị'] = 0;
+                                                }
+                                                $discount_value = $to_tal * ($gioHang['gia_tri'] / 100);
+                                                $tong = $to_tal + $shipping_fee - $discount_value;
+                                                // Lưu tổng tiền vào session
+                                                $_SESSION['tong_tien'] = $tong;
+                                                ?>
+                                                <div class="order-total">
+                                                    <div class="title">Tổng thanh toán</div>
+                                                    <div><span><?= number_format($tong) ?> VND</span></div>
                                                 </div>
                                                 <div class="proceed-to-checkout">
-                                                    <a href="<?=BASE_URL . '?act=checkout-giohang'?>" class="btn btn-info button ">
+                                                    <a href="<?= BASE_URL . '?act=checkout-giohang' ?>" class="btn btn-info button ">
                                                         Tiếp tục thanh toán
                                                     </a>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="shop-cart-empty">
-                                    <div class="notices-wrapper">
-                                        <p class="cart-empty">Your cart is currently empty.</p>
-                                    </div>
-                                    <div class="return-to-shop">
-                                        <a class="button" href="shop-grid-left.html">
-                                            Return to shop
-                                        </a>
-                                    </div>
+                            </div>
+                            <div class="shop-cart-empty">
+                                <div class="notices-wrapper">
+                                    <p class="cart-empty">Your cart is currently empty.</p>
+                                </div>
+                                <div class="return-to-shop">
+                                    <a class="button" href="shop-grid-left.html">
+                                        Return to shop
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- #content -->
-                </div><!-- #primary -->
-            </div><!-- #main-content -->
-        </div>
+                    </div>
+                </div><!-- #content -->
+            </div><!-- #primary -->
+        </div><!-- #main-content -->
+    </div>
 
-        <?php require_once './views/layouts/partials/footer.php' ?>
+    <?php require_once './views/layouts/partials/footer.php' ?>
     </div>
 
     <!-- Back Top button -->

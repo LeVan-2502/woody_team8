@@ -1,6 +1,6 @@
 <?php
-if(isset($_SESSION['admin'])) {
-  $admin = $_SESSION['admin'];
+if(isset($_SESSION['user'])) {
+  $user = $_SESSION['user'];
 } 
 ?>
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ if(isset($_SESSION['admin'])) {
                         <div class="section-padding">
                             <div class="section-container p-l-r">
                                 <div class="shop-checkout">
-                                    <form name="checkout" method="post" class="checkout" action="<?= BASE_URL . '?act=checkout-success' ?>" autocomplete="off">
+                                    <form name="checkout" method="post" class="checkout" action="<?= BASE_URL . '?act=checkout-thank' ?>" autocomplete="off">
                                         <input type="hidden" name="tong_tien" value="<?=$to_tal?>">
                                         
                                         <div class="row">
@@ -75,14 +75,14 @@ if(isset($_SESSION['admin'])) {
                                                         <div class="billing-fields-wrapper row">
                                                             <div class="col-6 form-row form-row-first validate-required">
                                                                 <label>Tên người nhận hàng <span class="required" title="required">*</span></label>
-                                                                <span class="input-wrapper"><input type="text" class="input-text" name="ten_nguoi_nhan" value=""></span>
+                                                                <span class="input-wrapper"><input type="text" class="input-text" name="ten_nguoi_nhan" value="<?=$taiKhoan['ho_ten']?>"></span>
                                                                 <?php if (isset($_SESSION['errors']['ten_nguoi_nhan'])) { ?>
                                                                     <div class="text-danger"><?= $_SESSION['errors']['ten_nguoi_nhan'] ?></div>
                                                                 <?php } ?>
                                                             </div>
                                                             <div class="col-6 form-row form-row-last validate-required">
                                                                 <label>Email <span class="required" title="required">*</span></label>
-                                                                <span class="input-wrapper"><input type="email" class="input-text" name="email_nguoi_nhan" value=""></span>
+                                                                <span class="input-wrapper"><input type="email" class="input-text" name="email_nguoi_nhan" value="<?=$taiKhoan['email']?>"></span>
                                                                 <?php if (isset($_SESSION['errors']['email_nguoi_nhan'])) { ?>
                                                                     <div class="text-danger"><?= $_SESSION['errors']['email_nguoi_nhan'] ?></div>
                                                                 <?php } ?>
@@ -90,7 +90,7 @@ if(isset($_SESSION['admin'])) {
                                                             <div class="col-12 form-row address-field validate-required form-row-wide">
                                                                 <label for="billing_city" class="">Địa chỉ người nhận<span class="required" title="required">*</span></label>
                                                                 <span class="input-wrapper">
-                                                                    <input type="text" class="input-text" name="dia_chi_nguoi_nhan" value="">
+                                                                    <input type="text" class="input-text" name="dia_chi_nguoi_nhan" value="<?=$taiKhoan['dia_chi']?>">
                                                                 </span>
                                                                 <?php if (isset($_SESSION['errors']['dia_chi_nguoi_nhan'])) { ?>
                                                                     <div class="text-danger"><?= $_SESSION['errors']['dia_chi_nguoi_nhan'] ?></div>
@@ -99,7 +99,7 @@ if(isset($_SESSION['admin'])) {
                                                             <div class="col-6 form-row address-field validate-required form-row-wide">
                                                                 <label>Sô điện thoại <span class="required" title="required">*</span></label>
                                                                 <span class="input-wrapper">
-                                                                    <input type="text" class="input-text" name="sdt_nguoi_nhan" placeholder="House number and street name" value="">
+                                                                    <input type="text" class="input-text" name="sdt_nguoi_nhan" placeholder="House number and street name" value="<?=$taiKhoan['so_dien_thoai']?>">
                                                                 </span>
                                                                 <?php if (isset($_SESSION['errors']['sdt_nguoi_nhan'])) { ?>
                                                                     <div class="text-danger"><?= $_SESSION['errors']['sdt_nguoi_nhan'] ?></div>
@@ -108,7 +108,7 @@ if(isset($_SESSION['admin'])) {
                                                             <div class="col-6 form-row address-field validate-required validate-postcode form-row-wide">
                                                                 <label>Ngày đặt<span class="required" title="required">*</span></label>
                                                                 <span class="input-wrapper">
-                                                                    <input type="date" class="input-text" name="ngay_dat" value="">
+                                                                    <input type="date" class="input-text" name="ngay_dat" value="<?=date('Y-m-d')?>">
                                                                 </span>
                                                                 <?php if (isset($_SESSION['errors']['ngay_dat'])) { ?>
                                                                     <div class="text-danger"><?= $_SESSION['errors']['ngay_dat'] ?></div>
@@ -141,7 +141,7 @@ if(isset($_SESSION['admin'])) {
                                                                         </div>
                                                                         <div class="product-name">
                                                                             <?= $sp['ten_san_pham'] ?>
-                                                                            <strong class="product-quantity">QTY : <?= $sp['so_luong'] ?></strong>
+                                                                            <strong class="product-quantity">SỐ LƯỢNG : <?= $sp['so_luong'] ?></strong>
                                                                         </div>
                                                                     </div>
                                                                     <div class="product-total">
@@ -152,9 +152,9 @@ if(isset($_SESSION['admin'])) {
 
                                                         </div>
                                                         <div class="cart-subtotal">
-                                                            <h2>Subtotal</h2>
+                                                            <h2>Tổng tiền</h2>
                                                             <div class="subtotal-price">
-                                                                <span><?=$to_tal?></span>
+                                                                <span>$<?=$_SESSION['tong_tien']?></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group ">
@@ -169,64 +169,15 @@ if(isset($_SESSION['admin'])) {
                                                                 <p class="text-danger"><?= $_SESSION['errors']['phuong_thuc_thanh_toan_id'] ?></p>
                                                             <?php } ?>
                                                         </div>
-                                                        <div class="shipping-totals shipping">
-                                                            <h2>Shipping</h2>
-                                                            <div data-title="Shipping">
-                                                                <ul class="shipping-methods custom-radio">
-                                                                    <li>
-                                                                        <input type="radio" name="shipping_method" data-index="0" value="free_shipping" class="shipping_method" checked="checked"><label>Free shipping</label>
-                                                                    </li>
-                                                                    <li>
-                                                                        <input type="radio" name="shipping_method" data-index="0" value="flat_rate" class="shipping_method"><label>Flat rate</label>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="order-total">
-                                                            <h2>Total</h2>
-                                                            <div class="total-price">
-                                                                <strong>
-                                                                    <span>$480.00</span>
-                                                                </strong>
-                                                            </div>
-                                                        </div>
+                                                                
                                                     </div>
                                                     <div id="payment" class="checkout-payment">
-                                                        <ul class="payment-methods methods custom-radio">
-                                                            <li class="payment-method">
-                                                                <input type="radio" class="input-radio" name="payment_method" value="bacs" checked="checked">
-                                                                <label for="payment_method_bacs">Direct bank transfer</label>
-                                                                <div class="payment-box">
-                                                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="payment-method">
-                                                                <input type="radio" class="input-radio" name="payment_method" value="cheque">
-                                                                <label>Check payments</label>
-                                                                <div class="payment-box">
-                                                                    <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="payment-method">
-                                                                <input type="radio" class="input-radio" name="payment_method" value="cod">
-                                                                <label>Cash on delivery</label>
-                                                                <div class="payment-box">
-                                                                    <p>Pay with cash upon delivery.</p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="payment-method">
-                                                                <input type="radio" class="input-radio" name="payment_method" value="paypal">
-                                                                <label>PayPal</label>
-                                                                <div class="payment-box">
-                                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <div class="form-row place-order">
                                                             <div class="terms-and-conditions-wrapper">
                                                                 <div class="privacy-policy-text"></div>
                                                             </div>
-                                                            <button type="submit" class="button alt" name="checkout_place_order" value="Place order">Place order</button>
+                                                            <button type="submit" class="button alt" name="redirect" value="Place order">Xác nhận đặt hàng</button>
                                                         </div>
                                                     </div>
                                                 </div>

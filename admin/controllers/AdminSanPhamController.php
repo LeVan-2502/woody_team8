@@ -98,6 +98,7 @@ class AdminSanPhamController
                 header('Location: ' . BASE_URL_ADMIN . '?act=sanpham');
                 exit();
             } else {
+                $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
                 $view = 'sanpham/add'; // Sửa tên view đúng cú pháp
                 require_once PATH_VIEW_ADMIN . 'layouts/master.php';
             }

@@ -9,7 +9,7 @@ class AdminXacThuc
     public function getThongTinTaiKhoan($email, $mat_khau)
     {
         try {
-            $sql = "SELECT * FROM tai_khoans WHERE email = :email AND mat_khau = :mat_khau AND chuc_vu_id=2 ";
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email AND mat_khau = :mat_khau AND chuc_vu_id= 2 ";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":email", $email);

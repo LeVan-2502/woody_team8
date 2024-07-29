@@ -1,9 +1,21 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
     <section class="content mt-3">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-12">
+                    <?php if (isset($_SESSION['thongbao'])) : ?>
+                        <div class="alert alert-<?= $_SESSION['thongbao']['type'] ?> alert-dismissible fade show" role="alert">
+                            <?= $_SESSION['thongbao']['message'] ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <?php unset($_SESSION['thongbao']); ?>
+                    <?php endif ?>
+                </div>
                 <div class="col-12">
                     <div class=" m-3 callout callout-info">
 
@@ -42,10 +54,26 @@
                                 <h4 class="text-primary fw-bold">THÔNG TIN ĐƠN HÀNG</h4>
                                 <address>
 
-                                    <strong>Phương thức thanh toán : </strong><?= $dh['ten_phuong_thuc'] ?><br>
-                                    <label class="" for="">Trạng thái hiện tại</label><span class=" ml-1 badge badge-danger"><?= $dh['ten_trang_thai'] ?></span>
+                                    <strong>PTTT : </strong><?= $dh['ten_phuong_thuc'] ?><br>
+                                    <label class="" for="">Trạng thái hiện tại</label> <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>
+                                        <?= hienThiTrangThai($dh['trang_thai_id'], $dh['ten_trang_thai']); ?>
+                                    <?php endif; ?>
                                 </address>
 
+                                <?php
+                                function hienThiTrangThai($trang_thai_id, $ten_trang_thai)
+                                {
+                                    $mauTrangThai = [
+                                        0 => 'badge-primary',  // Đặt hàng thành công - Màu xanh dương
+                                        1 => 'badge-info',     // Đang chuẩn bị hàng - Màu xanh nhạt
+                                        2 => 'badge-warning',  // Đang giao hàng - Màu vàng
+                                        3 => 'badge-success',  // Giao hàng thành công - Màu xanh lá
+                                        4 => 'badge-danger'    // Đơn hàng bị hủy - Màu đỏ
+                                    ];
+                                    $mau = isset($mauTrangThai[$trang_thai_id]) ? $mauTrangThai[$trang_thai_id] : 'badge-secondary';
+                                    return "<span class='badge $mau'>" . htmlspecialchars($ten_trang_thai) . "</span>";
+                                }
+                                ?>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -60,11 +88,11 @@
                             <div class="col-12 p-3 table-responsive">
 
                                 <form action="<?= BASE_URL_ADMIN ?>?act=sua-chitietdonhang" method="POST">
-                                    <input type="text" name="don_hang_id" value="<?=$id_don_hang ?>" hidden>
+                                    <input type="text" name="don_hang_id" value="<?= $id_don_hang ?>" hidden>
 
                                     <div class="row">
                                         <div class="form-group col-8">
-                                            <h4>Danh sách sản phẩm trong đơn hàng   </h4>
+                                            <h4>Danh sách sản phẩm trong đơn hàng </h4>
                                         </div>
 
                                         <div class="form-group col-3 text-left">
@@ -84,7 +112,7 @@
 
                                     </div>
                                 </form>
-
+                                <?php $this->thayDoiTrangThai(); ?>
 
                                 <table class="table table-bordered">
                                     <thead class="bg-info">
@@ -113,7 +141,7 @@
                                         <?php endforeach ?>
 
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
 
@@ -171,3 +199,15 @@
         </div><!-- /.container-fluid -->
     </section>
 </div>
+<script>
+    // Hàm để tự động đóng alert sau 5 giây
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 5000);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>

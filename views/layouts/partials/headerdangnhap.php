@@ -1,7 +1,12 @@
-
+<style>
+    #site-header {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tạo shadow bên dưới header */
+    position: relative; /* Đảm bảo header ở vị trí tương đối */
+}
+</style>
 <?php
-if (isset($_SESSION['admin'])) {
-    $admin = $_SESSION['admin'];
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
 } ?>
 <header id="site-header" class="site-header header-v1 relative">
     <div class="header-mobile">
@@ -25,50 +30,8 @@ if (isset($_SESSION['admin'])) {
                             <div class="dropdown mini-cart top-cart">
                                 <div class="remove-cart-shadow"></div>
                                 <a class="dropdown-toggle cart-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div>
+                                    <!-- <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div> -->
                                 </a>
-                                <div class="dropdown-menu cart-popup">
-                                    <div class="cart-empty-wrap">
-                                        <ul class="cart-list">
-                                            <li class="empty">
-                                                <span>No products in the cart.</span>
-                                                <a class="go-shop" href="shop-grid-left.html">GO TO SHOP<i aria-hidden="true" class="arrow_right"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="cart-list-wrap">
-                                        <ul class="cart-list ">
-                                            <li class="mini-cart-item">
-                                                <a href="#" class="remove" title="Remove this item"><i class="icon_close"></i></a>
-                                                <a href="shop-details.html" class="product-image"><img width="600" height="600" src="<?= BASE_URL ?>assets/ruper/media/product/3.jpg" alt=""></a>
-                                                <a href="shop-details.html" class="product-name">Chair Oak Matt Lacquered</a>
-                                                <div class="quantity">Qty: 1</div>
-                                                <div class="price">$150.00</div>
-                                            </li>
-                                            <li class="mini-cart-item">
-                                                <a href="#" class="remove" title="Remove this item"><i class="icon_close"></i></a>
-                                                <a href="shop-details.html" class="product-image"><img width="600" height="600" src="<?= BASE_URL ?>assets/ruper/media/product/1.jpg" alt=""></a>
-                                                <a href="shop-details.html" class="product-name">Zunkel Schwarz</a>
-                                                <div class="quantity">Qty: 1</div>
-                                                <div class="price">$100.00</div>
-                                            </li>
-                                        </ul>
-                                        <div class="total-cart">
-                                            <div class="title-total">Total: </div>
-                                            <div class="total-price"><span>$100.00</span></div>
-                                        </div>
-                                        <div class="free-ship">
-                                            <div class="title-ship">Buy <strong>$400</strong> more to enjoy <strong>FREE Shipping</strong></div>
-                                            <div class="total-percent">
-                                                <div class="percent" style="width:20%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="buttons">
-                                            <a href="shop-cart.html" class="button btn view-cart btn-primary">View cart</a>
-                                            <a href="shop-checkout.html" class="button btn checkout btn-default">Check out</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,8 +71,8 @@ if (isset($_SESSION['admin'])) {
                     <div class="row">
                         <div class="col-xl-3 col-lg-2 col-md-12 col-sm-12 col-12 header-left">
                             <div class="site-logo">
-                                <a href="<?=BASE_URL .'?act=xacthuc'?>">
-                                    <h1 class="fw-bold fs-1">WOODY</h1>
+                                <a href="<?=BASE_URL?>">
+                                    <h1 class="fw-bold fs-1"><strong style="color: gray;">WOODY</strong></h1>
                                 </a>
                             </div>
                         </div>
@@ -119,7 +82,7 @@ if (isset($_SESSION['admin'])) {
                                 <nav id="main-navigation">
                                     <ul id="menu-main-menu" class="menu">
                                         <li class="level-0 menu-item  mega-menu current-menu-item">
-                                            <a href="<?= BASE_URL ?>?act=xacthuc"><span class="menu-item-text">Trang chủ</span></a>
+                                            <a href="<?= BASE_URL ?>"><span class="menu-item-text">Trang chủ</span></a>
 
                                         </li>
                                         <li class="level-0 menu-item menu-item-has-children">
@@ -138,36 +101,18 @@ if (isset($_SESSION['admin'])) {
                                                 <li>
                                                     <a href="shop-wishlist.html"><span class="menu-item-text">Nội thất phòng bếp</span></a>
                                                 </li>
-                                                <li class="level-1 menu-item menu-item-has-children">
-
-                                                    <ul class="sub-menu">
-                                                        <li>
-                                                            <a href="shop-grid-left.html"><span class="menu-item-text">Chăn ga gối đệm</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left.html"><span class="menu-item-text">Phụ kiện nhà tắmr</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-right.html"><span class="menu-item-text">Phụ kiện phòng bếp</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right.html"><span class="menu-item-text">Đồ gia dụng</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-fullwidth.html"><span class="menu-item-text">Đồ trang trí</span></a>
-                                                        </li>
-                                                    </ul>
+                                                <li>
                                                     <a href="shop-grid-left.html"><span class="menu-item-text">Sản phẩm khác</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li class="level-0 menu-item">
-                                            <a href="blog-grid-left.html"><span class="menu-item-text">BÀI VIẾT</span></a>
+                                            <a href="<?= BASE_URL ?>?act=baiviet"><span class="menu-item-text">BÀI VIẾT</span></a>
 
                                         </li>
 
                                         <li class="level-0 menu-item">
-                                            <a href="page-contact.html"><span class="menu-item-text">Liên hệ</span></a>
+                                            <a href="<?= BASE_URL ?>?act=lienhe"><span class="menu-item-text">Liên hệ</span></a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -180,10 +125,10 @@ if (isset($_SESSION['admin'])) {
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img width="40px" src="<?= $admin['anh_dai_dien'] ?>" class="avatar rounded-circle" alt="Avatar"> <!-- Avatar ảnh tròn -->
+                                            <img width="40px" src="<?= $user['anh_dai_dien'] ?>" class="avatar rounded-circle" alt="Avatar"> <!-- Avatar ảnh tròn -->
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="<?= BASE_URL .'?act=myaccount&id_tai_khoan='.$admin['id']?>">My Account</a>
+                                            <a class="dropdown-item" href="<?= BASE_URL .'?act=myaccount&id_tai_khoan='.$user['id']?>">My Account</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="<?= BASE_URL ?>?act=dangxuat">Đăng xuất</a>
                                         </div>

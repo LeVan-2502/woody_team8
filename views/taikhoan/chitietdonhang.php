@@ -1,7 +1,3 @@
-<?php
-if (isset($_SESSION['admin'])) {
-    $admin = $_SESSION['admin'];
-} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,81 +33,136 @@ if (isset($_SESSION['admin'])) {
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;display=swap" rel="stylesheet">
     <style>
-        body.hold-transition.login-page {
+        /* body{
+            background-color: #f5f1de;
+        }
+         */
+        .order-summary {
+            margin-top: 20px;
+        }
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        .action-buttons {
+            margin-top: 20px;
         }
-        .container {
-            position: relative;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
-        .close-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f00;
+
+        .card-header {
+            font-weight: bold;
+            background-color: #4D555B;
             color: #fff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 20px;
-            font-size: 16px;
         }
-        .close-icon:hover {
-            background-color: #c00;
+
+        .card-header title {
+            background-color: #406346;
+        }
+
+        .table img {
+            max-width: 100px;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card-body {
+            background-color: #fff;
         }
     </style>
 </head>
 
 <body class="hold-transition login-page ">
 
-    <div id="product-details" class="container">
-        <div class="close-icon" onclick="closeContainer()">✖</div>
-        <div class="">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Ảnh sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá sản phẩm</th>
-                        <th>Số lượng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($chiTietDonHang as $key => $dh) : ?>
-                        <tr>
-                            <td><?= $key + 1 ?></td>
-                            <td>
-                                <img width="100px" src="<?= BASE_URL . $dh['hinh_anh'] ?>" alt="">
-                            </td>
-                            <td><?= $dh['ten_san_pham'] ?></td>
-                            <td><?= $dh['gia_san_pham'] ?></td>
-                            <td><?= $dh['so_luong'] ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-            <a href="javascript:history.back()">Trở về trang trước</a>
+    <div class="container">
+        <div class="card">
+            <div style="background-color: #152935;" class="card-header">
+                <h3 style="color:#fff; text-align: center;">Chi Tiết Đơn Hàng <strong><?= $donHang['ma_don_hang'] ?></strong></h3>
+            </div>
+
+            <!-- Thông tin đơn hàng -->
+            <div style="background-color: #E7E8E7;" class="card-body father">
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Thông tin đơn hàng
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Ngày đặt hàng:</strong> <?= $donHang['ngay_dat'] ?></p>
+                                <p><strong>Tình trạng đơn hàng:</strong> <span class="badge badge-info"><?= $donHang['ten_trang_thai'] ?></span></p>
+                                <p><strong>Phương thức thanh toán:</strong> <?= $donHang['ten_phuong_thuc'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin giao hàng -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Thông tin giao hàng
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Tên người nhận:</strong> <?= $donHang['ten_nguoi_nhan'] ?></p>
+                                <p><strong>Địa chỉ giao hàng:</strong> <?= $donHang['dia_chi_nguoi_nhan'] ?></p>
+                                <p><strong>Số điện thoại:</strong> <?= $donHang['sdt_nguoi_nhan'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách sản phẩm -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Danh sách sản phẩm
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hình ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Đơn giá</th>
+                                    <th scope="col">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($chiTietDonHang as $item) : ?>
+                                    <tr>
+                                        <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="Sản phẩm 1"></td>
+                                        <td><?= $item['ten_san_pham'] ?></td>
+                                        <td><?= $item['so_luong'] ?></td>
+                                        <td><?= $item['gia_san_pham'] ?></td>
+                                        <td><?= $item['so_luong'] * $item['gia_san_pham'] ?></td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+
+                        <!-- Tổng cộng đơn hàng -->
+                        <div class="order-summary text-right">
+                            <?php
+                            $to_tal = 0;
+                            foreach ($chiTietDonHang as $sp) {
+                                $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];
+                                $to_tal += $tong_tien;
+                            }
+                            ?>
+                            <p><strong>Tổng giá sản phẩm:</strong> <?= $to_tal ?></p>
+                            <p><strong>Phí vận chuyển:</strong> 30,000 VNĐ</p>
+                            <p><strong>Áp dụng mã giảm giá:</strong> 30,000 VNĐ</p>
+                            <p><strong>Tổng số tiền:</strong> <?= $to_tal + 30000 - 30000 ?> VNĐ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="action-buttons text-right">
+                    <a href="<?= BASE_URL ?>" class="btn btn-primary">Về trang chủ</a>
+                    <a onclick="return confirm('Bạn có chắc chắn muốn hủy đơn không?')" href="<?= BASE_URL.'?act=huy-donhang&id_don_hang='.$donHang['id'] ?>" class="btn btn-danger">Hủy đơn hàng</a>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
-
-
 
     <!-- Dependency Scripts -->
     <script src="<?= BASE_URL ?>assets/ruper/libs/popper/js/popper.min.js"></script>
@@ -127,51 +178,8 @@ if (isset($_SESSION['admin'])) {
 
     <!-- Site Scripts -->
     <script src="<?= BASE_URL ?>assets/ruper/assets/js/app.js"></script>
-
-    <script>
-        function closeContainer() {
-            document.getElementById('product-details').style.display = 'none';
-        }
-    </script>
-    <!-- Code injected by live-server -->
-    <script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function() {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function(msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        } else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-        // ]]>
-    </script>
 </body>
 
-<!-- Mirrored from caketheme.com/html/ruper/page-my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Jul 2024 00:53:39 GMT -->
+<!-- Mirrored from caketheme.com/html/ruper/page-my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Jul 2024 00:53:40 GMT -->
 
 </html>

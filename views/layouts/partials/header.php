@@ -1,3 +1,10 @@
+<style>
+    #site-header {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tạo shadow bên dưới header */
+    position: relative; /* Đảm bảo header ở vị trí tương đối */
+   
+}
+</style>
 <header id="site-header" class="site-header header-v1 relative">
     <div class="header-mobile">
         <div class="section-padding">
@@ -20,7 +27,7 @@
                             <div class="dropdown mini-cart top-cart">
                                 <div class="remove-cart-shadow"></div>
                                 <a class="dropdown-toggle cart-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div>
+                                    <!-- <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div> -->
                                 </a>
                                 <div class="dropdown-menu cart-popup">
                                     <div class="cart-empty-wrap">
@@ -118,7 +125,7 @@
 
                                         </li>
                                         <li class="level-0 menu-item menu-item-has-children">
-                                            <a href="<?= BASE_URL ?>?act=list-nguoixem"><span class="menu-item-text">Xem sản phẩm</span></a>
+                                            <a href="<?= BASE_URL ?>?act=listsanpham"><span class="menu-item-text">Xem sản phẩm</span></a>
                                             <ul class="sub-menu">
 
                                                 <li>
@@ -133,36 +140,18 @@
                                                 <li>
                                                     <a href="shop-wishlist.html"><span class="menu-item-text">Nội thất phòng bếp</span></a>
                                                 </li>
-                                                <li class="level-1 menu-item menu-item-has-children">
-
-                                                    <ul class="sub-menu">
-                                                        <li>
-                                                            <a href="#"><span class="menu-item-text">Chăn ga gối đệm</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><span class="menu-item-text">Phụ kiện nhà tắmr</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><span class="menu-item-text">Phụ kiện phòng bếp</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><span class="menu-item-text">Đồ gia dụng</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><span class="menu-item-text">Đồ trang trí</span></a>
-                                                        </li>
-                                                    </ul>
+                                                <li >
                                                     <a href=" #"><span class="menu-item-text">Sản phẩm khác</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li class="level-0 menu-item">
-                                            <a href="#"><span class="menu-item-text">BÀI VIẾT</span></a>
+                                            <a href="<?= BASE_URL ?>?act=baiviet"><span class="menu-item-text">BÀI VIẾT</span></a>
 
                                         </li>
 
                                         <li class="level-0 menu-item">
-                                            <a href="#"><span class="menu-item-text">Liên hệ</span></a>
+                                            <a href="<?= BASE_URL ?>?act=lienhe"><span class="menu-item-text">Liên hệ</span></a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -173,7 +162,7 @@
                             <div class="header-page-link">
                                 <!-- Login -->
                                 <div class="login-header">
-                                    <a class="active-login" href="<?= BASE_URL . '?act=dangnhap' ?>">Đăng nhập</a>
+                                    <a class="active-login" href="<?= BASE_URL .'?act=dangnhap' ?>">Đăng nhập</a>
                                     <div class="form-login-register">
                                         <div class="box-form-login">
                                             <div class="active-login"></div>

@@ -24,7 +24,7 @@ class AdminDonHang
             $this->debug($e);
         }
     }
-    
+
     public function getAllTrangThai()
     {
         try {
@@ -32,12 +32,11 @@ class AdminDonHang
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-            
         } catch (\Exception $e) {
             $this->debug($e);
         }
     }
-    
+
     public function getDetailDonHang($id)
     {
         try {
@@ -134,6 +133,8 @@ class AdminDonHang
         }
     }
 
+
+
     public function deleteDonHang($id)
     {
         try {
@@ -154,7 +155,7 @@ class AdminDonHang
         echo '</pre>';
         die();
     }
-    public function updateTrangThaiDonHang($id,$trang_thai_id)
+    public function updateTrangThaiDonHang($id, $trang_thai_id)
     {
         try {
             $sql = 'UPDATE don_hangs SET trang_thai_id = :trang_thai_id WHERE id=:id';
@@ -167,5 +168,35 @@ class AdminDonHang
         } catch (\Exception $e) {
             $this->debug($e);
         }
+    }
+
+    public function getTrangThaiHienTai($id)
+    {
+        try {
+            $sql = 'SELECT trang_thai_id FROM don_hangs WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id
+            ]);
+            // Lấy kết quả từ câu truy vấn
+            $trangThaiHienTai = $stmt->fetchColumn();
+            return $trangThaiHienTai;
+        } catch (\Exception $e) {
+            $this->debug($e);
+            return false;
+        }
+    }
+    
+    public function laChuyenDoiTrangThaiHopLe($trangThaiHienTai, $trangThaiMoi)
+    {
+        $chuyenDoiHopLe = [
+            0 => [1, 4], // Đặt hàng thành công -> Đang chuẩn bị hàng, Đơn hàng bị hủy
+            1 => [2, 4], // Đang chuẩn bị hàng -> Đang giao hàng, Đơn hàng bị hủy
+            2 => [3],    // Đang giao hàng -> Giao hàng thành công
+            3 => [],     // Giao hàng thành công -> Không chuyển đổi
+            4 => []      // Đơn hàng bị hủy -> Không chuyển đổi
+        ];
+
+        return in_array($trangThaiMoi, $chuyenDoiHopLe[$trangThaiHienTai]);
     }
 }

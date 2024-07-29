@@ -7,27 +7,28 @@ class GioHang
         $this->conn = connectDB();
     }
     public function showOneSanPham($id)
-    {
-        try {
-            $sql = 'SELECT *
-                    FROM san_phams
-                    WHERE san_phams.id = :id';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':id' => $id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (\Exception $e) {
-            $this->debug($e);
-        }
+{
+    try {
+        $sql = 'SELECT sp.id,
+                     sp.ten_san_pham,
+                     sp.gia_khuyen_mai,
+                     sp.hinh_anh,
+                     sp.gia_san_pham,
+                     sp.ngay_nhap,
+                     sp.mo_ta,
+                     sp.trang_thai
+                FROM san_phams sp
+                WHERE sp.id = :id'; // Sửa mệnh đề WHERE
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        $this->debug($e);
     }
+}
 
-    public function getCartID($tai_khoan_id)
-    {
-        $cart = $this->getCartByUserID($tai_khoan_id);
-        if (empty($cart)) {
-            return $this->insertCartGetLastID($tai_khoan_id);
-        }
-        return $cart['id'];
-    }
+
+    
 
     public function getCartByUserID($tai_khoan_id)
     {
@@ -42,14 +43,33 @@ class GioHang
             $this->debug($e);
         }
     }
-
-    public function insertCartGetLastID($tai_khoan_id)
+   
+    public function getThongTinGioHang($tai_khoan_id)
     {
         try {
-            $sql = 'INSERT INTO gio_hangs (tai_khoan_id)
-                    VALUES (:tai_khoan_id)';
+            $sql = 'SELECT gh.*, km.ten_khuyen_mai,km.gia_tri
+                    FROM gio_hangs gh
+                    LEFT JOIN khuyen_mais km ON gh.khuyen_mai_id = km.id
+                    WHERE gh.tai_khoan_id = :tai_khoan_id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':tai_khoan_id' => $tai_khoan_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
+    
+
+    public function insertCartGetLastID($tai_khoan_id, $khuyen_mai_id)
+    {
+        try {
+            $sql = 'INSERT INTO gio_hangs (tai_khoan_id, khuyen_mai_id)
+                    VALUES (:tai_khoan_id, :khuyen_mai_id)';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':tai_khoan_id' => $tai_khoan_id,
+                ':khuyen_mai_id' => $khuyen_mai_id
+            ]);
             return $this->conn->lastInsertId();
         } catch (\Exception $e) {
             $this->debug($e);
@@ -76,10 +96,19 @@ class GioHang
     public function getSanPhamGioHangUser($id)
     {
         try {
-            $sql = 'SELECT chi_tiet_gio_hangs.*, san_phams.hinh_anh, san_phams.gia_san_pham, san_phams.ten_san_pham
-                    FROM chi_tiet_gio_hangs
-                    INNER JOIN san_phams ON chi_tiet_gio_hangs.san_pham_id = san_phams.id
-                    WHERE chi_tiet_gio_hangs.gio_hang_id = :id';
+            $sql = 'SELECT ctgh.id as chitietdonhang_id, ctgh.so_luong, ctgh.gio_hang_id as gio_hang_id
+                            ,sp.id,
+
+                         sp.ten_san_pham,
+                         sp.gia_khuyen_mai,
+                         sp.hinh_anh,
+                         sp.gia_san_pham,
+                         sp.ngay_nhap,
+                         sp.mo_ta,
+                         sp.trang_thai
+                    FROM chi_tiet_gio_hangs as ctgh
+                    INNER JOIN san_phams as sp ON ctgh.san_pham_id = sp.id
+                    WHERE ctgh.gio_hang_id = :id';
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
@@ -107,6 +136,22 @@ class GioHang
             $this->debug($e);
         }
     }
+    public function deleteGioHangDuLieu($gio_hang_id)
+    {
+        try {
+            $sql = '
+                DELETE FROM chi_tiet_gio_hangs
+                WHERE gio_hang_id = :gio_hang_id
+            ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':gio_hang_id' => $gio_hang_id,
+            ]);
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
+
     public function updateSoLuongSanPhamGioHang($gio_hang_id, $san_pham_id, $so_luong)
     {
         try {
@@ -170,19 +215,21 @@ class GioHang
         }
     }
     public function capNhatSanPhamGioHang($id, $so_luong)
-    {
-        try {
-            $sql = "UPDATE chi_tiet_gio_hangs SET so_luong = :so_luong WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':so_luong', $so_luong, PDO::PARAM_INT);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-        } catch (\Exception $e) {
-            $this->debug($e);
-        }
+{
+    try {
+        $sql = "UPDATE chi_tiet_gio_hangs SET so_luong = :so_luong WHERE san_pham_id = :san_pham_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':so_luong', $so_luong, PDO::PARAM_INT);
+        $stmt->bindParam(':san_pham_id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (\Exception $e) {
+        $this->debug($e);
     }
+}
 
-    public function insertDonHang($tai_khoan_id, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_nguoi_nhan, $ngay_dat, $tong_tien, $ghi_chu, $phuong_thuc_thanh_toan_id, $trang_thai_id)
+
+
+    public function insertDonHang($tai_khoan_id, $ma_don_hang,$ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_nguoi_nhan, $ngay_dat, $tong_tien, $ghi_chu, $phuong_thuc_thanh_toan_id, $trang_thai_id)
     {
         $date = DateTime::createFromFormat('Y-m-d', $ngay_dat);
         if (!$date || $date->format('Y-m-d') !== $ngay_dat) {
@@ -197,6 +244,7 @@ class GioHang
             // SQL để chèn đơn hàng vào bảng don_hangs
             $sql = 'INSERT INTO don_hangs (
                     tai_khoan_id, 
+                    ma_don_hang,
                     ten_nguoi_nhan, 
                     email_nguoi_nhan, 
                     sdt_nguoi_nhan, 
@@ -208,6 +256,7 @@ class GioHang
                     trang_thai_id
                 ) VALUES (
                     :tai_khoan_id, 
+                    :ma_don_hang,
                     :ten_nguoi_nhan, 
                     :email_nguoi_nhan, 
                     :sdt_nguoi_nhan, 
@@ -221,6 +270,7 @@ class GioHang
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ':tai_khoan_id' => $tai_khoan_id,
+                ':ma_don_hang' => $ma_don_hang,
                 ':ten_nguoi_nhan' => $ten_nguoi_nhan,
                 ':email_nguoi_nhan' => $email_nguoi_nhan,
                 ':sdt_nguoi_nhan' => $sdt_nguoi_nhan,
@@ -266,6 +316,23 @@ class GioHang
         }
     }
 
+    public function updateKhuyenMaiGiohang($id,$khuyen_mai_id){
+        try {
+            $sql = 'UPDATE gio_hangs 
+                SET khuyen_mai_id= :khuyen_mai_id
+                WHERE id = :id
+                ';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+                ':khuyen_mai_id' => $khuyen_mai_id,
+
+            ]);
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
     private function debug($e)
     {
         echo '<pre>';

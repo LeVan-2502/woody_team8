@@ -50,19 +50,19 @@
 									<div class="col-lg-3 col-md-3">
 
 									</div>
-									<div class="container d-flex justify-content-center align-items-center min-vh-100 mb-5">
+									<div class="container d-flex justify-content-center align-items-center min-vh-50 mb-5">
 										<div class="row justify-content-center w-100">
-											<div class="col-lg-6 col-md-8 col-sm-12">
+											<div class="col-lg-4 col-md-8 col-sm-12">
 												<div class="card shadow-sm">
 													<div class="card-body">
-														<h2 class="card-title text-center">Login</h2>
-														<form method="post" class="logii" >
+														<h2 class="card-title text-center">ĐĂNG NHẬP</h2>
+														<form method="post" class="login" >
 															<div class="form-group">
 																<label for="username">Đăng nhập băng email <span class="text-danger">*</span></label>
 																<input type="text" class="form-control" name="email" id="username" required>
 															</div>
 															<div class="form-group">
-																<label for="password">Password <span class="text-danger">*</span></label>
+																<label for="password">Mật khẩu <span class="text-danger">*</span></label>
 																<input type="password" class="form-control" name="mat_khau" id="mat_khau" required>
 															</div>																								
 															<?php if (isset($_SESSION['error'])) : ?>
@@ -76,9 +76,10 @@
 																<label class="form-check-label" for="rememberme">Remember me</label>
 															</div>
 															<div class="form-group text-right">
-																<a href="page-forgot-password.html">Lost your password?</a>
+																<a href="<?=BASE_URL.'?act=form-quen-matkhau'?>">Quên mật khẩu?</a>
 															</div>
-															<button type="submit" class="btn btn-primary btn-block">Login</button>
+															<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+															<button type="submit" class="btn btn-danger btn-block">Đăng kí</button>
 														</form>
 													</div>
 												</div>

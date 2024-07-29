@@ -105,7 +105,7 @@ if(isset($_SESSION['admin'])) {
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
             <p>
-              Tài khoản Admin
+              Tài khoản
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -113,13 +113,13 @@ if(isset($_SESSION['admin'])) {
             <li class="nav-item">
               <a href="<?= BASE_URL_ADMIN ?>?act=quantrivien" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Danh sách</p>
+                <p>Quản trị viên</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN ?>?act=them-quantrivien" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN ?>?act=khachhang" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Thêm mới</p>
+                <p>Khách hàng</p>
               </a>
             </li>
 
@@ -129,19 +129,19 @@ if(isset($_SESSION['admin'])) {
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
             <p>
-              Đơn hàng
+              Tags
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN ?>?act=donhang" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN ?>?act=tag" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= BASE_URL_ADMIN ?>?act=them-donhang" class="nav-link">
+              <a href="<?= BASE_URL_ADMIN ?>?act=them-tag" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm mới</p>
               </a>
@@ -152,6 +152,91 @@ if(isset($_SESSION['admin'])) {
           </ul>
         </li>
         
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              Bài viết
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=baiviet" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=them-baiviet" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm mới</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              Sliders-Banners
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=listslider" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sliders</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=listbanner" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Banners</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+             Khuyến mãi
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=khuyenmai" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=them-khuyenmai" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm mới</p>
+              </a>
+            </li>
+
+
+
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN ?>?act=lien-he" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+             Liên hệ
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          
+        </li>
 
       </ul>
       </li>

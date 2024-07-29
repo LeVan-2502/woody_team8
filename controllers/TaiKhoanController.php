@@ -11,12 +11,13 @@ class TaiKhoanController
     public function taiKhoanCuaToi()
     {
 
-        $id = $_SESSION['admin']['id'];
-
-        $donHang = $this->modelTaiKhoan->getDonHangByTaiKhoanId($id);
+        $id = $_SESSION['user']['id'];
+        $donHang = $this->modelTaiKhoan-> getDonHangByTaiKhoanId($id);
+        
         $taiKhoan = $this->modelTaiKhoan->getDetailTaiKhoan($id);
         require_once './views/taikhoan/myaccount.php';
     }
+   
 
     public function formCapNhatTaiKhoan()
     {
@@ -90,7 +91,7 @@ class TaiKhoanController
                 $result = $this->modelTaiKhoan->updateTaiKhoan($id, $ho_ten, $ngay_sinh, $email, $so_dien_thoai, $gioi_tinh, $dia_chi, $mat_khau, $file_thumb);
                 if ($result) {
                     $taiKhoan = $this->modelTaiKhoan->getDetailTaiKhoan($id);
-                    $_SESSION['admin'] = $taiKhoan;
+                    $_SESSION['user'] = $taiKhoan;
                     header('Location: ' . BASE_URL . '?act=myaccount');
                     exit();
                 }
@@ -116,10 +117,48 @@ class TaiKhoanController
     }
     public function chiTietDonHang()
     {   
+        $user_id = $_SESSION['user']['id'];
         $id = $_GET['id_don_hang'];
-
+        
+        $donHang=$this->modelTaiKhoan->getThongTinĐonHang($id); 
+        
         $chiTietDonHang = $this->modelTaiKhoan->getSanPhamDonHang($id);
+       
         require_once './views/taikhoan/chitietdonhang.php';
-        deleteSessionError();
+       
     }
+    public function huyDonHang()
+{
+        $id = $_GET['id_don_hang'] ?? null;
+        $user_id = $_SESSION['user']['id'];
+        $IDtrangThaiHienTai = $this->modelTaiKhoan->getTrangThaiHienTai($id);
+
+        // Kiểm tra nếu trạng thái hiện tại là "Đang giao hàng"
+        if ($IDtrangThaiHienTai == 2 || $IDtrangThaiHienTai==3) {
+            $_SESSION['thongbao'] = [
+                'message' => "Không thể hủy đơn hàng khi đơn hàng đang ở trạng thái Đang giao hàng.",
+                'type' => "danger"
+                
+            ];
+           
+        } else {
+                if ($this->modelTaiKhoan->updateTrangThaiDonHang($id, 4)) {
+                    $_SESSION['thongbao'] = [
+                        'message' => "Cập nhật trạng thái đơn hàng thành công.",
+                        'type' => "success"
+                    ];
+                } else {
+                    $_SESSION['thongbao'] = [
+                        'message' => "Lỗi khi cập nhật trạng thái đơn hàng.",
+                        'type' => "danger"
+                    ];
+                }
+            
+        }
+        header('Location: ' . BASE_URL . '?act=myaccount&id_tai_khoan='.$user_id);
+        exit();
+    
+}
+
+   
 }

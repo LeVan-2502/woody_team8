@@ -31,9 +31,14 @@
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap" rel="stylesheet">
+    <style>
+        body.home.home-5 {
+        background-color: #f5f5f5;
+        }
+    </style>
 </head>
 
-<body class="home home-5">
+<body style="background-color: #f5f5f5;" class="home home-5">
     <div id="page" class="hfeed page-wrapper">
         <?php require_once './views/layouts/partials/header.php' ?>
 

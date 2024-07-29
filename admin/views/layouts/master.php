@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
@@ -28,6 +30,37 @@
     <link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= BASE_URL_ADMIN ?>assets/plugins/summernote/summernote-bs4.min.css">
+
+    <script src="<?= BASE_URL_ADMIN ?>assets/plugins//tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            plugins: 'image code',
+            toolbar: 'undo redo | link image | code',
+            image_title: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                input.onchange = function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+                input.click();
+            }
+        });
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -57,6 +90,7 @@
         
         <!-- /.control-sidebar -->
     </div>
+    
     <!-- ./wrapper -->
 
     <!-- jQuery -->
@@ -107,6 +141,7 @@
     <script src="<?= BASE_URL_ADMIN ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?= BASE_URL_ADMIN ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
+        
         // <![CDATA[  <-- For SVG support
         if ('WebSocket' in window) {
             (function() {
@@ -174,6 +209,14 @@
             });
         });
     </script>
+    <script>
+tinymce.init({
+  selector: '#mytextarea',
+  plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+  toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+  content_css: 'https://www.tiny.cloud/css/codepen.min.css'
+});
+</script>
 </body>
 
 </html>

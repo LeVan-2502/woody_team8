@@ -75,7 +75,7 @@
                                     <div class="form-group col-6">
                                         <label for="">Danh mục</label>
                                         <select name="danh_muc_id" id="danh_muc_id" class="form-control">
-                                            <option selected disabled value="">Chọn danh mục sản phẩm</option>
+                                            <option selected disabled value="">Chọn danh mục</option>
                                             <?php foreach ($listDanhMuc as $danhmuc) : ?>
                                                 <option value="<?= $danhmuc['id'] ?>"><?= $danhmuc['ten_danh_muc'] ?></option>
                                             <?php endforeach ?>
@@ -84,6 +84,7 @@
                                             <p class="text-danger"><?= $errors['danh_muc_id'] ?></p>
                                         <?php } ?>
                                     </div>
+
 
                                     <div class="form-group col-6">
                                         <label for="">Trạng thái</label>
