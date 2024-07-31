@@ -11,6 +11,7 @@ class AdminSanPhamController
     public function danhSachSanPham()
     {
         $view = 'sanpham/index';
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         $listSanPham = $this->modelSanPham->getAllSanPham();
 
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
@@ -21,6 +22,21 @@ class AdminSanPhamController
         $view = 'sanpham/add';
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }
+    public function locSanPham()
+    {
+        $danhMucId = isset($_POST['danh_muc_id']) ? $_POST['danh_muc_id'] : '';
+        if ($danhMucId) {
+            $listSanPham = $this->modelSanPham->getAllSanPhamByDanhMuc($danhMucId);
+        } else {
+            $listSanPham = $this->modelSanPham->getAllSanPham();
+        }
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+
+        // Truyền dữ liệu đến view
+        $view = 'sanpham/index';
+        require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
+    }
+
     public function postThemSanPham()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -135,14 +151,14 @@ class AdminSanPhamController
             $danh_muc_id = $_POST['danh_muc_id'];
             $trang_thai = $_POST['trang_thai'];
             $mo_ta = $_POST['mo_ta'];
-    
+
             $hinh_anh = $_FILES['hinh_anh'];
             $file_thumb = '';
-    
+
             // Lấy thông tin sản phẩm hiện tại từ cơ sở dữ liệu
             $sanPhamHienTai = $this->modelSanPham->getDetailSanPham($id);
             $file = $sanPhamHienTai['hinh_anh'];
-    
+
             // Xử lý upload file mới
             if ($hinh_anh['error'] == UPLOAD_ERR_OK) {
                 // Upload file mới và lấy tên file mới
@@ -155,7 +171,7 @@ class AdminSanPhamController
                 // Nếu không có tệp mới tải lên, giữ lại tên tệp hiện tại
                 $file_thumb = $file;
             }
-        
+
             // Kiểm tra lỗi
             $errors = [];
             if (empty($ten_san_pham)) {
@@ -182,19 +198,19 @@ class AdminSanPhamController
             if (empty($mo_ta)) {
                 $errors['mo_ta'] = 'Mô tả không được để trống';
             }
-    
+
             // Nếu không có lỗi, cập nhật sản phẩm và chuyển hướng về danh sách sản phẩm
             if (empty($errors)) {
                 $this->modelSanPham->updateSanPham(
-                    $id, 
-                    $ten_san_pham, 
-                    $gia_san_pham, 
-                    $gia_khuyen_mai, 
-                    $so_luong, 
-                    $ngay_nhap, 
-                    $danh_muc_id, 
-                    $trang_thai, 
-                    $mo_ta, 
+                    $id,
+                    $ten_san_pham,
+                    $gia_san_pham,
+                    $gia_khuyen_mai,
+                    $so_luong,
+                    $ngay_nhap,
+                    $danh_muc_id,
+                    $trang_thai,
+                    $mo_ta,
                     $file_thumb
                 );
                 header('Location: ' . BASE_URL_ADMIN . '?act=sanpham');
@@ -219,7 +235,7 @@ class AdminSanPhamController
             }
         }
     }
-    
+
 
 
 
@@ -237,19 +253,19 @@ class AdminSanPhamController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $san_pham_id = $_POST['san_pham_id'] ?? '';
-            
+
             // Lấy danh sách ảnh hiện tại của sản phẩm
             $listAnhSanPhamCurrent = $this->modelSanPham->getListAnhSanPham($san_pham_id);
-            
+
             // Xử lý các ảnh được gửi từ form
             $img_array = $_FILES['img_array'] ?? null;
-    
+
             $img_delete = isset($_POST['img_delete']) ? explode(',', $_POST['img_delete']) : [];
             $current_img_ids = $_POST['current_img_ids'] ?? [];
-    
+
             // Khai báo mảng để lưu ảnh thêm mới hoặc thay thế ảnh cũ
             $upload_file = [];
-    
+
             // Upload ảnh mới hoặc thay thế ảnh cũ
             foreach ($img_array['name'] as $key => $value) {
                 if ($img_array['error'][$key] == UPLOAD_ERR_OK) {
@@ -262,15 +278,15 @@ class AdminSanPhamController
                     }
                 }
             }
-    
+
             // Lưu ảnh mới vào db và xóa ảnh cũ nếu có
             foreach ($upload_file as $file_info) {
                 if ($file_info['id']) {
                     $old_file = $this->modelSanPham->getDetailAnhSanPham($file_info['id'])['link_hinh_anh'];
-    
+
                     // Cập nhật ảnh cũ
                     $this->modelSanPham->updateAnhSanPham($file_info['id'], $file_info['file']);
-    
+
                     // Xóa ảnh cũ
                     deleteFile($old_file);
                 } else {
@@ -278,23 +294,22 @@ class AdminSanPhamController
                     $this->modelSanPham->insertAlbumSanPham($san_pham_id, $file_info['file']);
                 }
             }
-    
+
             // Xóa các ảnh đã chọn từ danh sách hiện tại
             foreach ($listAnhSanPhamCurrent as $anhSP) {
                 $anh_id = $anhSP['id'];
                 // Xóa ảnh trong db
                 if (in_array($anh_id, $img_delete)) {
                     $this->modelSanPham->destroyAnhSanPham($anh_id);
-    
+
                     // Xóa file
                     deleteFile($anhSP['link_hinh_anh']);
                 }
             }
-    
+
             // Chuyển hướng sau khi hoàn thành
             header('Location: ' . BASE_URL_ADMIN . '?act=form-sua-sanpham&id_san_pham=' . $san_pham_id);
             exit();
         }
     }
-    
 }

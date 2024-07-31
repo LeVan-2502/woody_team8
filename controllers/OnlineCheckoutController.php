@@ -200,7 +200,7 @@ class OnlineCheckoutController
         $tong_tien = $_SESSION['tong_tien'] ?? null;
         $ghi_chu = $_POST['ghi_chu'] ?? null;
         $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'] ?? null;
-        $trang_thai_id = 1;
+        $trang_thai_id = 0;
 
         $itemGioHang=$this->modelGioHang->getCartByUserID($tai_khoan_id);
         if(isset($_SESSION['cart'])){

@@ -8,7 +8,6 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
-require_once './controllers/DashboardController.php';
 require_once './controllers/AdminDonhangController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminXacThucController.php';
@@ -18,6 +17,7 @@ require_once './controllers/AdminTagController.php';
 require_once './controllers/AdminKhuyenMaiController.php';
 require_once './controllers/AdminSliderBannerController.php';
 require_once './controllers/AdminLienHeController.php';
+require_once './controllers/AdminDashBoardController.php';
 // require_once './controller/AdminSanPhamController.php';
 
 // Require toàn bộ file Models
@@ -32,6 +32,7 @@ require_once './models/AdminTag.php';
 require_once './models/AdminKhuyenMai.php';
 require_once './models/AdminSliderBanner.php';
 require_once './models/AdminLienHe.php';
+require_once './models/AdminDashBoard.php';
 
 // require_once './model/AdminDanhMuc.php';
 
@@ -43,7 +44,12 @@ middleware_auth_check_admin($act);
 
 match ($act) {
     // Trang chủ
-    '/'=>(new DashboardController())->dashboard(),
+    
+    '/' =>(new AdminDashBoardController())->doanhThuDashBoard(),
+    'donhang-dashboard' =>(new AdminDashBoardController())->formThemDashBoard(),
+    'khachhang-dashboard' =>(new AdminDashBoardController())->postSuaDashBoard(),
+    'form-sua-dashboard' =>(new AdminDashBoardController())->formSuaDashBoard(),
+    'xoa-dashboard' =>(new AdminDashBoardController())->deleteDashBoard(),
 
     'lien-he' =>(new AdminLienHeController())->danhSachLienHe(),
 
@@ -61,10 +67,12 @@ match ($act) {
     'form-sua-sanpham' =>(new AdminSanPhamController())->formSuaSanPham(),
     'xoa-sanpham' =>(new AdminSanPhamController())->deleteSanPham(),
     'sua-albumsanpham' =>(new AdminSanPhamController())->formAlbumSanPham(),
+    'loc-sanpham' =>(new AdminSanPhamController())->locSanPham(),
     
     'donhang' =>(new AdminDonHangController())->danhSachDonHang(),
     'form-chitietdonhang' =>(new AdminDonHangController())->formDetailDonHang(),
     'sua-chitietdonhang' =>(new AdminDonHangController())->thayDoiTrangThai(),
+    'loc-donhang' =>(new AdminDonHangController())->locDonHang(),
     
     'quantrivien' =>(new AdminTaiKhoanController())->danhSachQuanTriVien(),
     'khachhang' =>(new AdminTaiKhoanController())->danhSachKhachHang(),
@@ -112,4 +120,7 @@ match ($act) {
    
     'dangnhap' =>(new AdminXacThucController())->formLogin(),
     'dangxuat' =>(new AdminXacThucController())->logout(),
+
+    
+   
 };

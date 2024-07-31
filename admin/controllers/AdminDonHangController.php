@@ -11,6 +11,7 @@ class AdminDonHangController
     public function danhSachDonHang()
     {
         $view = 'donhang/index';
+        $listTrangThai = $this->modelDonHang->getAllTrangThai();
         $listDonHang = $this->modelDonHang->getAllDonHang();
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }
@@ -25,6 +26,20 @@ class AdminDonHangController
         $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id_don_hang);
     
         $view = 'donhang/detail';
+        require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
+    }
+    public function locDonHang()
+    {
+        $trangThaiId = isset($_POST['trang_thai_id']) ? $_POST['trang_thai_id'] : '';
+        if ($trangThaiId) {
+            $listDonHang= $this->modelDonHang->getAllDonHangByTrangThai($trangThaiId);
+        } else {
+            $listDonHang= $this->modelDonHang->getAllDonHang();
+        }
+        $listTrangThai = $this->modelDonHang->getAllTrangThai();
+
+        // Truyền dữ liệu đến view
+        $view = 'donhang/index';
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }
     public function thayDoiTrangThai()

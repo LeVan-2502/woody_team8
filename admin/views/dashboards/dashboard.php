@@ -1,88 +1,69 @@
+<style>
+    /* Tùy chỉnh CSS cho thanh điều hướng */
+    /* .navbar-custom {
+        background-color: #343a40;
+    } */
+
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+    }
+
+    .navbar-custom .navbar-nav .nav-link:hover {
+        color: #d5d5d5;
+    }
+
+    a {
+        padding: 20px;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+
+
+    <!-- Liên kết đến file JavaScript Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-custom mb-4 row">
+
+                <a class="navbar-brand bg-info" href="#">Quản Lý Thống Kê</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div style="background-color: #343a40;" class="collapse navbar-collapse align-item-center justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=doanhthu">Doanh Thu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=donhang">Đơn Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=khachhang">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=sanpham">Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=giao_hang">Giao Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=quangcao">Quảng Cáo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?act=phanhoi">Phản Hồi</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
+            <!-- <?php require_once  PATH_VIEW_ADMIN . 'dashboard/partials/' . $view . '.php'; ?> -->
             <!-- /.row -->
             <!-- Main row -->
             <div class="row">
