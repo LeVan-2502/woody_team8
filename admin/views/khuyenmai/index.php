@@ -45,8 +45,8 @@
                       <td class="align-middle"><?= $km['ngay_ket_thuc'] ?></td>
                       <td class="align-middle"><?= $km['trang_thai'] == 1 ? 'Hoạt động' : 'Đã kết thúc' ?></td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-khuyenmai&id_khuyen_mai=' . $km['id'] ?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-khuyenmai&id_khuyen_mai=' . $km['id'] ?>">Xóa</a>
+                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-khuyenmai&id_khuyen_mai=' . $km['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-khuyenmai&id_khuyen_mai=' . $km['id'] ?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

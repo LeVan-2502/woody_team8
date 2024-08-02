@@ -41,8 +41,8 @@
                       <td class="align-middle"><?= $binhluan['noi_dung'] ?></td>
                       <td  class="align-middle"><?= $binhluan['trang_thai'] ==1 ? '<span class="badge badge-success" >Hiển thị</span>' : '<span class="badge badge-danger" >Ẩn</span>'?></td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=sua-chitietbinhluan&id_binh_luan=' . $binhluan['id']?>" class="btn btn-warning">Đổi trang thái</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-binhluan&id_binh_luan=' . $binhluan['id']?>">Xóa</a>
+                        <a title="Thay đổi trạng thái" href="<?= BASE_URL_ADMIN . '?act=sua-chitietbinhluan&id_binh_luan=' . $binhluan['id']?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-repeat"></i></a>
+                        <a title="Xóa bình luận"  class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-binhluan&id_binh_luan=' . $binhluan['id']?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

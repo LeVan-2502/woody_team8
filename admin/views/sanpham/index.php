@@ -67,9 +67,9 @@
                       <td class="align-middle"><?= $sanpham['so_luong'] ?></td>
                       <td class="align-middle"><?= $sanpham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?></td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-sanpham&id_san_pham=' . $sanpham['id'] ?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-sanpham&id_san_pham=' . $sanpham['id'] ?>">Xóa</a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=binhluan&id_san_pham=' . $sanpham['id'] ?>" class="btn btn-info">Bình luận sản phẩm</a>
+                        <a title="Sửa thông tin" href="<?= BASE_URL_ADMIN . '?act=form-sua-sanpham&id_san_pham=' . $sanpham['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a title="Xóa thông tin"  class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-sanpham&id_san_pham=' . $sanpham['id'] ?>"><i class="fa-solid fa-trash"></i></a>
+                        <a title="Bình luận sản phẩm"  href="<?= BASE_URL_ADMIN . '?act=binhluan&id_san_pham=' . $sanpham['id'] ?>" class="btn btn-info"><i class="fa-solid fa-comment"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

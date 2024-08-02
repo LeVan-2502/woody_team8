@@ -37,8 +37,8 @@
                       <td class="align-middle"><?= $danhmuc['ten_danh_muc'] ?></td>
                       <td class="align-middle"><?= $danhmuc['mo_ta'] ?></td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danhmuc&id_danh_muc=' . $danhmuc['id']?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-danhmuc&id_danh_muc=' . $danhmuc['id']?>">Xóa</a>
+                        <a title="Sửa danh mục" href="<?= BASE_URL_ADMIN . '?act=form-sua-danhmuc&id_danh_muc=' . $danhmuc['id']?>" class="btn btn-warning" ><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a title="Xóa danh mục" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-danhmuc&id_danh_muc=' . $danhmuc['id']?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

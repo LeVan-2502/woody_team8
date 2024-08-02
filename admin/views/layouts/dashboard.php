@@ -130,7 +130,7 @@
             <!-- Main content -->
             <section class="content mt-3">
                 <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg navbar-custom mb-4 row">
+                    <!-- <nav class="navbar navbar-expand-lg navbar-custom mb-4 row">
 
                         <a class="navbar-brand" href="#">QUẢN LÝ THỐNG KÊ</a>
 
@@ -162,7 +162,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </nav>
+                    </nav> -->
                     <?php require_once PATH_VIEW_ADMIN . $view . '.php' ?>
 
                 </div>

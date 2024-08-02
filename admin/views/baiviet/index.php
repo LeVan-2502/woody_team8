@@ -52,8 +52,8 @@
                       <td class="align-middle"><?= $tk['luot_binh_luan'] ?></td>
                       
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-baiviet&id_bai_viet=' . $tk['id'] ?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-baiviet&id_bai_viet=' . $tk['id'] ?>">Xóa</a>
+                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-baiviet&id_bai_viet=' . $tk['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-baiviet&id_bai_viet=' . $tk['id'] ?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

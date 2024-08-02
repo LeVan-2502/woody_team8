@@ -41,9 +41,22 @@
 		<div id="site-main" class="site-main mt-4">
 			<div id="main-content" class="main-content">
 				<div id="primary" class="content-area">
-					
+
 
 					<div id="content" class="site-content" role="main">
+						<div class="row">
+							<div class="col-12">
+								<?php if (isset($_SESSION['thongbao'])) : ?>
+									<div class="alert alert-<?= $_SESSION['thongbao']['type'] ?> alert-dismissible fade show" role="alert">
+										<?= $_SESSION['thongbao']['message'] ?>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<?php unset($_SESSION['thongbao']); ?>
+								<?php endif ?>
+							</div>
+						</div>
 						<div class="section-padding">
 							<div class="container justify-content-center align-items-center">
 								<div class="page-login-register">
@@ -56,7 +69,7 @@
 												<div class="card shadow-sm">
 													<div class="card-body">
 														<h2 class="card-title text-center">ĐĂNG NHẬP</h2>
-														<form method="post" class="login" >
+														<form method="post" class="login">
 															<div class="form-group">
 																<label for="username">Đăng nhập băng email <span class="text-danger">*</span></label>
 																<input type="text" class="form-control" name="email" id="username" required>
@@ -64,7 +77,7 @@
 															<div class="form-group">
 																<label for="password">Mật khẩu <span class="text-danger">*</span></label>
 																<input type="password" class="form-control" name="mat_khau" id="mat_khau" required>
-															</div>																								
+															</div>
 															<?php if (isset($_SESSION['error'])) : ?>
 																<p class="text-danger">
 																	<?= $_SESSION['error'] ?>
@@ -76,10 +89,10 @@
 																<label class="form-check-label" for="rememberme">Remember me</label>
 															</div>
 															<div class="form-group text-right">
-																<a href="<?=BASE_URL.'?act=form-quen-matkhau'?>">Quên mật khẩu?</a>
+																<a href="<?= BASE_URL . '?act=form-quen-matkhau' ?>">Quên mật khẩu?</a>
 															</div>
 															<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-															<button type="submit" class="btn btn-danger btn-block">Đăng kí</button>
+															<a href="<?= BASE_URL . '?act=form-dangki' ?>" class="btn btn-danger btn-block">Đăng kí</a>
 														</form>
 													</div>
 												</div>

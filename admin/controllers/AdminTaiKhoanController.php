@@ -30,6 +30,8 @@ class AdminTaiKhoanController
     public function danhSachDonHang()
     {
         $id=$_GET['id_tai_khoan'];
+        $dh=$this->modelTaiKhoan->getDetailTaiKhoan($id);
+       
         $listDonHang =  $this->modelTaiKhoan->getAllDonHangTaiKhoan($id);
        
         $view = 'taikhoan/listdonhang';

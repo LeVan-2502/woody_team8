@@ -23,6 +23,7 @@ class AdminDonHangController
        
         $dh =$this->modelDonHang->getDonHang($id_don_hang);
        
+       
         $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id_don_hang);
     
         $view = 'donhang/detail';

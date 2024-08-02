@@ -58,6 +58,8 @@ match ($act) {
 
     'dangnhap' => (new XacThucController())->formLogin(),
     'dangxuat' => (new XacThucController())->logout(),
+    'form-dangki' => (new XacThucController())->formDangKi(),
+    'post-dangki' => (new XacThucController())->postDangKi(),
  
     
     'locsanpham-caothap' => (new ListSanPhamController())->locSanPhamCaoThap(),

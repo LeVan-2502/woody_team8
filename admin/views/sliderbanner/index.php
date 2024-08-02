@@ -11,7 +11,7 @@
             <div class="card-header">
               <div class="row">
                 <div class="col-10">
-                  <h3 class="">Danh sách <?=$anh_he_thong?></h3>
+                  <h3 class="">Danh sách <?= $anh_he_thong ?></h3>
                 </div>
                 <div class="col-2">
                   <a href="<?= BASE_URL_ADMIN ?>?act=form-them-sliderbanner" class="btn btn-success ">Thêm mới Slider-Banner</a>
@@ -49,16 +49,8 @@
                       <td class="align-middle"><?= $sl['type'] == 1 ? 'Sliders' : 'Banners' ?></td>
                       <td class="align-middle"><?= $sl['thu_tu_xuat_hien'] ?></td>
                       <td class="align-middle">
-                        <div class="row">
-                          <div class="col-12 mb-1">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-sua-sliderbanner&id_slider_banner=' . $sl['id'] ?>" class="btn btn-warning">Sửa</a>
-                          </div>
-                          <div class="col-12">
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-sliderbanner&id_slider_banner=' . $sl['id'] ?>">Xóa</a>
-                          </div>
-                        </div>
-
-
+                        <a title="Sửa thông tin" href="<?= BASE_URL_ADMIN . '?act=form-sua-sliderbanner&id_slider_banner=' . $sl['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a title="Xóa thông tin" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-sliderbanner&id_slider_banner=' . $sl['id'] ?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

@@ -59,9 +59,9 @@
                         <?php endif; ?>
                       </td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-chitietdonhang&id_don_hang=' . $donhang['id'] ?>" class="btn btn-primary">Chi tiết</a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-donhang&id_don_hang=' . $donhang['id'] ?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-donhang&id_don_hang=' . $donhang['id'] ?>">Xóa</a>
+                        <a title="Chi tiết đơn hàng" href="<?= BASE_URL_ADMIN . '?act=form-chitietdonhang&id_don_hang=' . $donhang['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-circle-info"></i></a>
+                        <!-- <a  href="<?= BASE_URL_ADMIN . '?act=form-sua-donhang&id_don_hang=' . $donhang['id'] ?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a> -->
+                        <!-- <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-donhang&id_don_hang=' . $donhang['id'] ?>"><i class="fa-solid fa-trash"></i></a> -->
                       </td>
                     </tr>
                   <?php endforeach ?>

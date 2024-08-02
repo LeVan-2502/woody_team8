@@ -35,6 +35,29 @@ class XacThuc
             exit();
         }
     }
+    public function insertTaiKhoan($ho_ten, $ngay_sinh, $email, $so_dien_thoai, $gioi_tinh, $dia_chi, $mat_khau, $chuc_vu_id, $trang_thai, $anh_dai_dien)
+    {
+        try {
+            $sql = 'INSERT INTO tai_khoans( ho_ten,  ngay_sinh,  email,  so_dien_thoai,  gioi_tinh,  dia_chi,  mat_khau,  chuc_vu_id,trang_thai, anh_dai_dien)          
+                    VALUES (:ho_ten, :ngay_sinh, :email, :so_dien_thoai, :gioi_tinh, :dia_chi, :mat_khau, :chuc_vu_id, :trang_thai, :anh_dai_dien)';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':ho_ten' => $ho_ten,
+                ':ngay_sinh' => $ngay_sinh,
+                ':email' => $email,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':gioi_tinh' => $gioi_tinh,
+                ':dia_chi' => $dia_chi,
+                ':mat_khau' => $mat_khau,
+                ':chuc_vu_id' => $chuc_vu_id,
+                ':trang_thai' => $trang_thai,
+                ':anh_dai_dien' => $anh_dai_dien
+            ]);
+            return true;
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
     private function debug($e)
     {
         echo '<pre>';

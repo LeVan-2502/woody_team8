@@ -31,7 +31,7 @@ if(isset($_SESSION['admin'])) {
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-layer-group mr-2"></i>
             <p>
               Danh mục
               <i class="fas fa-angle-left right"></i>
@@ -55,7 +55,7 @@ if(isset($_SESSION['admin'])) {
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-couch mr-2"></i>
             <p>
               Sản phẩm
               <i class="fas fa-angle-left right"></i>
@@ -79,7 +79,7 @@ if(isset($_SESSION['admin'])) {
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-cart-shopping mr-2"></i>
             <p>
               Đơn hàng
               <i class="fas fa-angle-left right"></i>
@@ -103,7 +103,7 @@ if(isset($_SESSION['admin'])) {
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-user mr-2"></i>
             <p>
               Tài khoản
               <i class="fas fa-angle-left right"></i>
@@ -127,7 +127,7 @@ if(isset($_SESSION['admin'])) {
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-tag mr-2"></i>
             <p>
               Tags
               <i class="fas fa-angle-left right"></i>
@@ -154,7 +154,7 @@ if(isset($_SESSION['admin'])) {
         
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-square-pen mr-2"></i>
             <p>
               Bài viết
               <i class="fas fa-angle-left right"></i>
@@ -178,7 +178,7 @@ if(isset($_SESSION['admin'])) {
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-image mr-2"></i>
             <p>
               Sliders-Banners
               <i class="fas fa-angle-left right"></i>
@@ -203,7 +203,7 @@ if(isset($_SESSION['admin'])) {
         
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-burst mr-2"></i>
             <p>
              Khuyến mãi
               <i class="fas fa-angle-left right"></i>
@@ -229,7 +229,7 @@ if(isset($_SESSION['admin'])) {
         </li>
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN ?>?act=lien-he" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <i class="fa-solid fa-id-card-clip mr-2"></i>
             <p>
              Liên hệ
               <i class="fas fa-angle-left right"></i>

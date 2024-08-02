@@ -42,7 +42,7 @@
                             <div class="col-sm-4 invoice-col">
                                 <h4 class="text-primary fw-bold">TO</h4>
                                 <address>
-                                    <strong><?= $dh['ten_nguoi_nhan'] ?></strong><br>
+                                    <strong><?= mb_strtoupper($dh['ten_nguoi_nhan'], 'UTF-8') ?></strong><br>
                                     <strong>SĐT </strong><?= $dh['sdt_nguoi_nhan'] ?><br>
                                     <strong>Email </strong><?= $dh['email_nguoi_nhan'] ?><br>
                                     <strong>Địa chỉ </strong><?= $dh['dia_chi_nguoi_nhan'] ?><br>
@@ -55,6 +55,7 @@
                                 <address>
 
                                     <strong>PTTT : </strong><?= $dh['ten_phuong_thuc'] ?><br>
+                                    <strong>Ngày đặt hàng : </strong><?= $dh['ngay_dat'] ?><br>
                                     <label class="" for="">Trạng thái hiện tại</label> <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>
                                         <?= hienThiTrangThai($dh['trang_thai_id'], $dh['ten_trang_thai']); ?>
                                     <?php endif; ?>
@@ -115,14 +116,14 @@
                                 <?php $this->thayDoiTrangThai(); ?>
 
                                 <table class="table table-bordered">
-                                    <thead class="bg-info">
+                                    <thead class="bg-primary">
                                         <tr>
                                             <th>STT</th>
                                             <th>Hình ảnh</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
                                             <th>Giá sản phẩm</th>
-                                            <th>Subtotal</th>
+                                            <th>Thành tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,12 +135,22 @@
                                                 </td>
                                                 <td class="align-middle"><?= $spdh['ten_san_pham'] ?></td>
                                                 <td class="align-middle"><?= $spdh['so_luong'] ?></td>
-                                                <td class="align-middle"><?= $spdh['gia_san_pham'] ?></td>
-                                                <td class="align-middle"><?= $spdh['thanh_tien'] ?></td>
+                                                <td class="align-middle"><?= number_format($spdh['gia_san_pham']) ?></td>
+                                                <td class="align-middle"><?=  number_format($spdh['so_luong']*$spdh['gia_san_pham']) ?></td>
 
                                             </tr>
                                         <?php endforeach ?>
+                                        <?php
+                                        $to_tal = 0;
+                                        foreach ($sanPhamDonHang as $sp) {
+                                            $tong_tien = $sp['gia_san_pham'] * $sp['so_luong'];
+                                            $to_tal += $tong_tien;
+                                        }
 
+                                        $ship=200000;
+                                        $giaTriKM = $dh['gia_tri']/100;
+                                        $thanh_toan=$to_tal+$ship-$to_tal*$giaTriKM;
+                                        ?>
                                     </tbody>
 
                                 </table>
@@ -155,44 +166,33 @@
                     <div class="invoice m-3">
                         <div class="row">
                             <div class="col-12 p-3">
-                                <p class="lead mt-2">Amount Due 2/22/2014</p>
 
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
                                         <tr>
-                                            <th style="width:50%">Subtotal:</th>
-                                            <td>$250.30</td>
+                                            <th style="width:50%">Tổng tiến đơn hàng</th>
+                                            <td><strong><?= number_format($to_tal) ?></strong><small> VND</small></td>
                                         </tr>
                                         <tr>
-                                            <th>Tax (9.3%)</th>
-                                            <td>$10.34</td>
+                                            <th>Phí giao hàng</th>
+                                            <td><strong><?= number_format($ship) ?></strong><small> VND</small></td>
                                         </tr>
                                         <tr>
-                                            <th>Shipping:</th>
-                                            <td>$5.80</td>
-                                        </tr>
+                                            <th>Áp dụng mã khuyến mãi</th>
+                                           <td>
+                                           <button class="btn btn-danger" type="button"><?= $dh['ten_khuyen_mai'] ?></button>
+                                           </tr>
+                                           </td>
                                         <tr>
-                                            <th>Total:</th>
-                                            <td>$265.24</td>
+                                            <th>Tổng thanh toán</th>
+                                            <td><strong><?= number_format($thanh_toan) ?></strong><small> VND</small></td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="m-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                    Payment
-                                </button>
-                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Generate PDF
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- /.invoice -->
                 </div><!-- /.col -->
             </div><!-- /.row -->

@@ -211,7 +211,6 @@
                         <td class="align-middle"><?= $sanpham['ten_san_pham'] ?></td>
                         <td class="align-middle"><?= $sanpham['tong_so_luong'] ?></td>
                         <td class="align-middle"><strong><?= number_format($sanpham['tong_doanh_thu']) ?></strong> VND</td>
-
                     </tr>
                 <?php endforeach ?>
             </tbody>

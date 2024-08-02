@@ -37,8 +37,8 @@
                       <td class="align-middle"><?= $tag['ten_tag'] ?></td>
                       <td class="align-middle"><?= $tag['mo_ta'] ?></td>
                       <td class="align-middle">
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-tag&id_tag=' . $tag['id']?>" class="btn btn-warning">Sửa</a>
-                        <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-tag&id_tag=' . $tag['id']?>">Xóa</a>
+                        <a title="Sửa tag" href="<?= BASE_URL_ADMIN . '?act=form-sua-tag&id_tag=' . $tag['id']?>" class="btn btn-warning"><i style="color: white;" class="fa-solid fa-hammer"></i></a>
+                        <a title="Xóa tag" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL_ADMIN . '?act=xoa-tag&id_tag=' . $tag['id']?>"><i class="fa-solid fa-trash"></i></a>
                       </td>
                     </tr>
                   <?php endforeach ?>
