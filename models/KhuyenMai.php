@@ -114,6 +114,37 @@ class KhuyenMai
             return [];
         }
     }
+    public function resetKhuyenMaiGioHang($id)
+{
+    try {
+        // Câu lệnh SQL để cập nhật khuyến mãi cho giỏ hàng
+        $sql = 'UPDATE gio_hangs
+                SET khuyen_mai_id = 0
+                WHERE tai_khoan_id = :id';
+
+        // Chuẩn bị câu lệnh SQL
+        $stmt = $this->conn->prepare($sql);
+
+        // Thực thi câu lệnh với tham số id
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
+        // Kiểm tra xem câu lệnh có thành công hay không
+        if ($stmt->rowCount() > 0) {
+            return true; // Cập nhật thành công
+        } else {
+            return false; // Không có hàng nào bị ảnh hưởng
+        }
+    } catch (\Exception $e) {
+        // Ghi lại lỗi nếu có
+        $this->debug($e);
+
+        // Có thể trả về false để xử lý sau
+        return false;
+    }
+}
+
     
     
     

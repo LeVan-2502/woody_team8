@@ -81,8 +81,9 @@ match ($act) {
     'sua-taikhoan' =>(new AdminTaiKhoanController())->postSuaTaiKhoan(),
     'form-sua-taikhoan' =>(new AdminTaiKhoanController())->formSuaTaiKhoan(),
     'xoa-taikhoan' =>(new AdminTaiKhoanController())->deleteTaiKhoan(),
-    'chitiet-taikhoan' =>(new AdminTaiKhoanController())->showTaiKhoan(),
+    'chitiet-quantrivien' =>(new AdminTaiKhoanController())->showTaiKhoan(),
     'danhsach-donhang' =>(new AdminTaiKhoanController())->danhSachDonHang(),
+    'capnhat-admin' => (new AdminTaiKhoanController())->postCapNhatAdmin(),
 
     'tag' =>(new AdminTagController())->danhSachTag(),
     'them-tag' =>(new AdminTagController())->postThemTag(),

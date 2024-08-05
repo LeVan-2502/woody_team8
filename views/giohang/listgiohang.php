@@ -163,7 +163,7 @@
                                                     <div class="cart-subtotal">
                                                         <div class="title">Mã giảm giá đã chọn</div>
                                                         <button class="btn btn-danger">
-                                                            <?php if($_SESSION['cart']==[]){
+                                                            <?php if($_SESSION['khuyen_mais']==[]){
                                                                 echo 'Bạn chưa chọn';
                                                             }
                                                             else{

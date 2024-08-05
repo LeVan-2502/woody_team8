@@ -5,12 +5,14 @@ class OnlineCheckoutController
 {
     public $modelOnlineCheckout;
     public $modelGioHang;
+    public $modelKhuyenMai;
     
     public function __construct()
     {
     
         $this-> modelOnlineCheckout = new OnlineCheckout();
         $this-> modelGioHang = new GioHang();
+        $this-> modelKhuyenMai = new KhuyenMai();
     }
    
     public function formThank()
@@ -70,14 +72,18 @@ class OnlineCheckoutController
 
 
         );
-     
+        $id=$_SESSION['user']['id'];
         $this->insertOrderDetails($donHangId);
         $this->updateSoLuongDSSanPhams($donHangId);
         $this->clearCart();
+        $this->modelKhuyenMai->resetKhuyenMaiGioHang($id);
+
         unset($_SESSION['cart']);
         unset($_SESSION['errors']);
         unset($_SESSION['checkout_data']);
-        unset($_SESSION['checkout_data']);
+        unset($_SESSION['khuyen_mais']);
+        unset($_SESSION['thong_tin_gio_hang']);
+        
 
         
     }

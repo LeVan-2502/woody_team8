@@ -10,13 +10,14 @@ class HomeController
 
     public function home()
     {
+       
         $listSlider = $this->modelHome->getAllSlider();
         $listBanner = $this->modelHome->getAllBanner();
         $top3BaiVietNoiBat = $this->modelHome->top3BaiVietNoiBat();
         $top8Moi = $this->modelHome->top8SanPhamMoi();
         $top8Xem = $this->modelHome->top8SanPhamXemNhieu();
         $top8BanChay = $this->modelHome->top8SanPhamBanChay();
-
+        
         require_once './views/home/home.php';
     }
     public function lienHe()

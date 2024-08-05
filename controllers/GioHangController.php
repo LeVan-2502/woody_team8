@@ -3,13 +3,14 @@
 class GioHangController
 {
     public $modelGioHang;
-    public $model;
+    public $modelTaiKhoan;
     public $modelKhuyenMai;
     public $modelOnlineCheckout;
 
     public function __construct()
     {
         $this->modelGioHang = new GioHang();
+        $this->modelTaiKhoan = new TaiKhoan();
         $this->modelKhuyenMai = new KhuyenMai();
         $this->modelOnlineCheckout = new OnlineCheckout();
     }
@@ -80,17 +81,11 @@ class GioHangController
     
        
         // Lấy giỏ hàng từ cơ sở dữ liệu
-        $gio_hang_id = $this->modelOnlineCheckout->getCartID($user_id);
-        
-        if ($gio_hang_id === null) {
-            throw new Exception('Cart ID not found for user ID: ' . $user_id);
-        }
-        
+       $donHang = $this->modelTaiKhoan->getDonHangByTaiKhoanId($user_id);
         // Kiểm tra số lượng đơn hàng của tài khoản
-        $check = $this->modelKhuyenMai->countDonHangTaiKhoan($gio_hang_id);
-        
+       
         // Nếu không có đơn hàng nào, lưu khuyến mãi id 1 vào session
-        if (empty($check)) {
+        if (empty($donHang)) {
             $_SESSION['khuyen_mais'][1] = $khuyenMai1;
         }
         

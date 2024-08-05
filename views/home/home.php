@@ -50,8 +50,9 @@
                     <div id="content" class="site-content" role="main">
                         <?php require_once './views/home/partials/slider.php' ?>
                         <?php require_once './views/home/partials/danhsach.php' ?>
-                        <?php require_once './views/home/partials/khampha.php' ?>
+                       
                         <?php require_once './views/home/partials/baiviet.php' ?>
+                        <?php require_once './views/home/partials/khampha.php' ?>
                     </div><!-- #content -->
                 </div><!-- #primary -->
             </div><!-- #main-content -->

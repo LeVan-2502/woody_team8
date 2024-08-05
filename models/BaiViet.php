@@ -21,6 +21,40 @@ class BaiViet
             $this->debug($e);
         }
     }
+    public function getAllBaiVietByDanhMuc($id)
+    {
+        try {
+            $sql = 'SELECT bv.*, dm.ten_danh_muc, tk.ho_ten, DATE_FORMAT(bv.ngay_dang, "%M %d, %Y") AS ngay_dinh_dang 
+                    FROM bai_viets bv
+                    INNER JOIN danh_mucs dm ON bv.danh_muc_id = dm.id
+                    INNER JOIN tai_khoans tk ON bv.tai_khoan_id = tk.id
+                    WHERE bv.danh_muc_id=:id
+                    ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
+    public function getAllBaiVietByTag($id)
+    {
+        try {
+            $sql = 'SELECT bv.*, dm.ten_danh_muc, tk.ho_ten, DATE_FORMAT(bv.ngay_dang, "%M %d, %Y") AS ngay_dinh_dang,t.* 
+                    FROM  bai_viets_tags bvt
+                    INNER JOIN tags t ON bvt.tag_id = t.id
+                    INNER JOIN bai_viets bv ON bvt.bai_viet_id= bv.id
+                    INNER JOIN danh_mucs dm ON bv.danh_muc_id = dm.id
+                    INNER JOIN tai_khoans tk ON bv.tai_khoan_id = tk.id
+                    WHERE bvt.tag_id =:id
+                    ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
     public function getChiTietBaiViet($id)
 {
     try {
@@ -60,6 +94,21 @@ class BaiViet
             $this->debug($e);
         }
     }
+    public function getDatailTag($id)
+    {
+        try {
+            $sql = 'SELECT *
+                    FROM tags
+                    WHERE id=:id
+                    
+                    ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
     public function getTagBaiViet($id)
     {
         try {
@@ -91,23 +140,37 @@ class BaiViet
             $this->debug($e);
         }
     }
-    public function countSanPhamDanhMuc()
+    public function getDetailDanhMuc($id)
     {
         try {
-            $sql = 'SELECT dm.ten_danh_muc, COUNT(bv.id) AS so_bai_viet
-                    FROM danh_mucs dm
-                    LEFT JOIN bai_viets bv ON dm.id = bv.danh_muc_id
-                    GROUP BY dm.ten_danh_muc;
-
-                    
+            $sql = 'SELECT *
+                    FROM danh_mucs
+                    WHERE id=:id
                     ';
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
         } catch (\Exception $e) {
             $this->debug($e);
         }
     }
+    public function countSanPhamDanhMuc()
+{
+    try {
+        $sql = 'SELECT dm.id, dm.ten_danh_muc, COUNT(bv.id) AS so_bai_viet
+                FROM danh_mucs dm
+                LEFT JOIN bai_viets bv ON dm.id = bv.danh_muc_id
+                GROUP BY dm.id, dm.ten_danh_muc';
+                
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (\Exception $e) {
+        $this->debug($e);
+        return [];
+    }
+}
+
     public function bonBaiVietGanDay()
     {
         try {

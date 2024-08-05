@@ -17,7 +17,6 @@ if (isset($_SESSION['user'])) {
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="media/favicon.png">
-
     <!-- Dependency Styles -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/libs/bootstrap/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/libs/feather-font/css/iconfont.css" type="text/css">
@@ -29,6 +28,8 @@ if (isset($_SESSION['user'])) {
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/libs/slick/css/slick-theme.css" type="text/css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/libs/mmenu/css/mmenu.min.css" type="text/css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/libs/slider/css/jslider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css
+">
 
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/assets/css/app.css" type="text/css">
@@ -41,7 +42,7 @@ if (isset($_SESSION['user'])) {
 
 <body class="shop">
     <div id="page" class="hfeed page-wrapper">
-    <?php
+        <?php
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
             require_once './views/layouts/partials/headerdangnhap.php';
@@ -70,27 +71,30 @@ if (isset($_SESSION['user'])) {
                             <div class="section-container p-l-r">
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-                                        <div class="products-topbar clearfix">
-                                                <div class="products-topbar-left">
-                                                    <div class="products-count">
-                                                        Kết quả gồm <strong><?=$countSP?></strong> sản phẩm
-                                                    </div>
-                                                </div>
-                                                <div class="products-topbar-right ml-2">
-                                                    <div class="products-sort dropdown">
+
+                                        <div class="products-topbar clearfix row">
+                                            <div class="col-3 products-topbar-left">
+                                                <form class="d-flex" action="<?= BASE_URL . '?act=timkiem-sanpham' ?>" method="post">
+                                                    <input type="text" name="tu_khoa" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+                                                    <button type="submit" class="btn btn-primary ml-2">
+                                                        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-7"></div>
+                                            <div class="col-2 d-flex justify-content-end align-items-center">
+                                                <!-- Phần lọc sản phẩm hiện tại -->
+                                                <div class="products-sort dropdown">
                                                     <span class="sort-toggle dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Lọc sản phẩm</span>
                                                     <ul class="sort-list dropdown-menu" x-placement="bottom-start">
-                                                        <li class="active"><a href="#">Lọc sản phẩm</a></li>
-                                                        <li><a href="<?=BASE_URL . '?act=locsanpham-caothap'?>">Theo giá từ thấp đến cao</a></li>
-                                                        <li><a href="<?=BASE_URL . '?act=locsanpham-thapcao'?>">Theo giá từ cao đến thấp</a></li>
-                                                        <li><a href="<?=BASE_URL . '?act=locsanpham-moinhat'?>">Sản phẩm mới nhất</a></li>
-                                                        <li><a href="<?=BASE_URL . '?act=locsanpham-phobien'?>">Sản phẩm phổ biến nhất</a></li>
+                                                        <li class="active"><a href="<?= BASE_URL . '?act=listsanpham' ?>">Tất cả các sản phẩm</a></li>
+                                                        <li><a href="<?= BASE_URL . '?act=locsanpham-caothap' ?>">Theo giá từ thấp đến cao</a></li>
+                                                        <li><a href="<?= BASE_URL . '?act=locsanpham-thapcao' ?>">Theo giá từ cao đến thấp</a></li>
+                                                        <li><a href="<?= BASE_URL . '?act=locsanpham-moinhat' ?>">Sản phẩm mới nhất</a></li>
+                                                        <li><a href="<?= BASE_URL . '?act=locsanpham-phobien' ?>">Sản phẩm phổ biến nhất</a></li>
                                                     </ul>
                                                 </div>
-                                                
                                             </div>
-                                            
-                                       
                                         </div>
 
                                         <div class="tab-content">
@@ -544,7 +548,7 @@ if (isset($_SESSION['user'])) {
                 renderPagination();
             });
         </script>
-        
+
 
 </body>
 

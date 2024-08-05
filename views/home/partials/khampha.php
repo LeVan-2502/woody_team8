@@ -1,67 +1,83 @@
-<section class="section section-padding m-b-70">
-                            <div class="section-container">
-                                <div class="block-widget-wrap">
-                                    <!-- Block Lookbook -->
-                                    <div class="block block-lookbook no-space color-white">
-                                        <div class="background-overlay background-2"></div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="lookbook-wrap default">
-                                                    <div class="lookbook-container">
-                                                        <div class="lookbook-content">
-                                                            <div class="item">
-                                                                <img width="703" height="702" src="<?= BASE_URL ?>assets/ruper/media/banner/lookbook-7.jpg" alt="Look Book 1">
-                                                                <div class="item-lookbook" style="height:30px;width:30px;left:19.63%;top:82.62%">
-                                                                    <span class="number-lookbook">1</span>
-                                                                    <div class="content-lookbook" style="left:33px;bottom:10px;">
-                                                                        <div class="item-thumb">
-                                                                            <a href="shop-details.html">
-                                                                                <img width="1000" height="1000" src="<?= BASE_URL ?>assets/ruper/media/product/1.jpg" alt="">
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="content-lookbook-bottom">
-                                                                            <div class="item-title">
-                                                                                <a href="shop-details.html">Zunkel Schwarz</a>
-                                                                            </div>
-                                                                            <span class="price">
-                                                                                <del aria-hidden="true"><span>$150.00</span></del>
-                                                                                <ins><span>$100.00</span></ins>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item-lookbook" style="height:30px;width:30px;left:83.91%;top:74.79%">
-                                                                    <span class="number-lookbook">2</span>
-                                                                    <div class="content-lookbook" style="right:33px;bottom:10px;">
-                                                                        <div class="item-thumb">
-                                                                            <a href="shop-details.html">
-                                                                                <img width="1000" height="1000" src="<?= BASE_URL ?>assets/ruper/media/product/12.jpg" alt="">
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="content-lookbook-bottom">
-                                                                            <div class="item-title">
-                                                                                <a href="shop-details.html">Mundo Sofa With Cushion</a>
-                                                                            </div>
-                                                                            <span class="price">$150.00</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="lookbook-intro-wrap position-center text-center">
-                                                    <div class="lookbook-intro">
-                                                        <h4 class="sub-title">Discover the new Koti Sofa</h4>
-                                                        <h2 class="title">Like lounging on<br> a cloud</h2>
-                                                        <a href="shop-grid-left.html" class="button button-white">SHOP NOW</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+<section class="section m-b-0">
+    <!-- Block Instagram -->
+    <div class="block block-instagram slider no-space">
+        <div class="slick-wrap">
+            <div class="slick-sliders fullwidth slick-initialized slick-slider" data-dots="false" data-item_row="1" data-nav="false" data-columns4="1" data-columns3="2" data-columns2="3" data-columns1="4" data-columns="5">
+
+
+
+
+
+                <div class="slick-list draggable">
+                    <div class="slick-track" style="opacity: 1; width: 4264px; transform: translate3d(-984px, 0px, 0px);">
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-8.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="-2" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-9.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-10.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-current slick-active" style="width: 328px;" data-slick-index="0" aria-hidden="false" tabindex="0">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="0">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-6.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-active" style="width: 328px;" data-slick-index="1" aria-hidden="false" tabindex="0">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="0">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-7.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-active" style="width: 328px;" data-slick-index="2" aria-hidden="false" tabindex="0">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="0">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-8.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide" style="width: 328px;" data-slick-index="3" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-9.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide" style="width: 328px;" data-slick-index="4" aria-hidden="true" tabindex="-1">
+                                <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-10.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="5" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-6.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="6" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-7.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="7" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-8.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="8" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-9.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                        <div class="item slick-slide slick-cloned" style="width: 328px;" data-slick-index="9" id="" aria-hidden="true" tabindex="-1">
+                            <a class="instagram" href="https://www.instagram.com/" tabindex="-1">
+                                <img width="690" height="690" src="<?= BASE_URL ?>assets/ruper/media/banner/instagram-10.jpg" alt="Image Slider">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

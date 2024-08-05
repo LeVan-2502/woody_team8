@@ -187,7 +187,7 @@
                                         </div>
                                     </div>
                                     <div id="comments" class="comments-area">
-                                        <h3 class="comments-title">1 Comment</h3>
+                                        <h3 class="comments-title">1 Bình luận</h3>
                                         <div class="comments-list">
                                             <div class="comment-item">
                                                 <div class="comment-avatar">
@@ -209,24 +209,22 @@
                                         </div>
                                         <div class="comment-form">
                                             <div class="form-header">
-                                                <h3>Leave a Reply</h3>
+                                                <h3>Bình luận bài viết</h3>
                                             </div>
                                             <form action="#" method="post" class="row" novalidate="">
-                                                <div class="comment-notes col-md-12 col-sm-12">Your email address will not be published.</div>
+                                                
                                                 <div class="form-group col-md-12 col-sm-12">
-                                                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment" class="form-control"></textarea>
+                                                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Nhập nội dung" class="form-control bg-white"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6">
-                                                    <input id="author" placeholder="Your Name *" name="author" type="text" value="" size="30" class="form-control">
+                                                    <input id="author" placeholder="Tên của bạn *" name="author" type="text" value="" size="30" class="form-control bg-white">
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6">
-                                                    <input id="email" placeholder="Your Email *" name="email" type="text" value="" size="30" class="form-control">
+                                                    <input id="email" placeholder="Email *" name="email" type="text" value="" size="30" class="form-control bg-white">
                                                 </div>
-                                                <div class="form-group col-md-12 col-sm-12">
-                                                    <input id="url" name="url" placeholder="Website" type="text" value="" size="30" class="form-control">
-                                                </div>
+                                               
                                                 <div class="form-group col-md-12">
-                                                    <input name="submit" type="submit" id="submit" class="btn button-outline" value="Post Comment">
+                                                    <input name="submit" type="submit" id="submit" class="btn button-outline" value="Gửi bình luận">
                                                 </div>
                                             </form>
                                         </div>

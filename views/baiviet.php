@@ -81,7 +81,7 @@
                                                     <ul>
                                                         <?php foreach ($countSanPhamDanhMuc as $dm) : ?>
                                                             <li class="current">
-                                                                <a href="blog-grid-left.html"><?= $dm['ten_danh_muc'] ?><span class="count"><?= $dm['so_bai_viet'] ?></span></a>
+                                                                <a href="<?= BASE_URL . '?act=listbaiviet-bydanhmuc&id_danh_muc=' . $dm['id'] ?>"><?= $dm['ten_danh_muc'] ?><span class="count"><?= $dm['so_bai_viet'] ?></span></a>
                                                             </li>
                                                         <?php endforeach ?>
                                                     </ul>
@@ -98,12 +98,12 @@
                                                 <ul class="posts-list">
                                                     <?php foreach ($bonBaiVietGanDay as $bv) : ?>
                                                         <li class="post-item">
-                                                            <a href="blog-details-right.html" class="post-image">
+                                                            <a href="<?= BASE_URL . '?act=chitiet-baiviet&id_bai_viet='.$bv['id']?>" class="post-image">
                                                                 <img src="<?= $bv['hinh_anh'] ?>">
                                                             </a>
                                                             <div class="post-content">
                                                                 <h2 class="post-title">
-                                                                    <a href="blog-details-right.html">
+                                                                    <a href="<?= BASE_URL . '?act=chitiet-baiviet&id_bai_viet='.$bv['id']?>">
                                                                         <?= $bv['tieu_de'] ?>
                                                                     </a>
                                                                 </h2>
@@ -131,7 +131,7 @@
                                                     <ul>
                                                         <?php foreach ($listAllTag as $tag) : ?>
                                                             <li>
-                                                                <a href="<?= BASE_URL . '?act=listtag&id_tag=' . $tag['id'] ?>"><?= $tag['ten_tag'] ?></a>
+                                                                <a href="<?= BASE_URL . '?act=listbaiviet-bytag&id_tag=' . $tag['id'] ?>"><?= $tag['ten_tag'] ?></a>
                                                             </li>
                                                         <?php endforeach ?>
                                                     </ul>
@@ -145,7 +145,12 @@
                                             <div class="row">
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade show active" id="layout-grid" role="tabpanel">
+                                                        <div class="row ml-1 mb-3">
+                                                            <strong class="mr-3" style="font-size: 1.5rem;">Danh sách bài viết <span style="font-weight: 400; font-size:1.25rem;"><?=$title?></span>
+                                                            </strong>
+                                                        </div>
                                                         <div id="dataContainer" class="products-list grid row">
+
                                                             <!-- Các bài viết sẽ được thêm vào đây -->
                                                         </div>
                                                     </div>

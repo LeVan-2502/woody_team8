@@ -162,68 +162,16 @@
                             <div class="header-page-link">
                                 <!-- Login -->
                                 <div class="login-header">
-                                    <a class="active-login" href="<?= BASE_URL .'?act=dangnhap' ?>">Đăng nhập</a>
-                                    <div class="form-login-register">
-                                        <div class="box-form-login">
-                                            <div class="active-login"></div>
-                                            <div class="box-content">
-                                                <div class="form-login active">
-                                                    <form id="login_ajax" method="post" class="login">
-                                                        <h2>Đăng kí</h2>
-                                                        <p class="status"></p>
-                                                        <div class="content">
-                                                            <div class="username">
-                                                                <input type="text" required="required" class="input-text" name="username" id="username" placeholder="Your name" />
-                                                            </div>
-                                                            <div class="password">
-                                                                <input class="input-text" required="required" type="password" name="password" id="password" placeholder="Password" />
-                                                            </div>
-                                                            <div class="rememberme-lost">
-                                                                <div class="rememberme">
-                                                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
-                                                                    <label for="rememberme" class="inline">Lưu lại mật khẩu</label>
-                                                                </div>
-                                                                <div class="lost_password">
-                                                                    <a href="forgot-password.html">Quên mật khẩu?</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="button-login">
-                                                                <input type="submit" class="button" name="login" value="Login" />
-                                                            </div>
-                                                            <div class="button-next-reregister">Tạo tài khoản mới</div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="form-register">
-                                                    <form method="post" class="register">
-                                                        <h2>REGISTER</h2>
-                                                        <div class="content">
-                                                            <div class="email">
-                                                                <input type="email" class="input-text" placeholder="Email" name="email" id="reg_email" value="" />
-                                                            </div>
-                                                            <div class="password">
-                                                                <input type="password" class="input-text" placeholder="Password" name="password" id="reg_password" />
-                                                            </div>
-                                                            <div class="button-register">
-                                                                <input type="submit" class="button" name="register" value="Register" />
-                                                            </div>
-                                                            <div class="button-next-login">Đăng kí tài khoản mới ngay bây giờ</div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a class="login" href="<?= BASE_URL ?>?act=dangnhap">Đăng nhập</a>    
                                 </div>
 
                                 <!-- Search -->
 
 
                                 <!-- Wishlist -->
-                                <div class="wishlist-box">
-                                    <a href="<?= BASE_URL . '?act=dangnhap' ?>"><i class="icon-heart"></i></a>
-
-                                </div>
+                                <!-- <div class="wishlist-box">
+                                    <a href="<?= BASE_URL ?>?act=dangnhap"><i class="icon-heart"></i></a>
+                                </div> -->
 
                                 <!-- Cart -->
 

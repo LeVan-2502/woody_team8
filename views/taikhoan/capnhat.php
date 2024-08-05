@@ -1,6 +1,6 @@
 <?php
-if (isset($_SESSION['admin'])) {
-    $admin = $_SESSION['admin'];
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
 } ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +69,7 @@ if (isset($_SESSION['admin'])) {
 
 
                                         <form enctype="multipart/form-data" action="<?= BASE_URL ?>?act=post-capnhattaikhoan" method="POST">
-                                            <input type="hidden" name="id" value="<?= $admin['id'] ?>">
+                                            <input type="hidden" name="id" value="<?= $user['id'] ?>">
 
                                             <div class="row">
                                                 <div class="col-4">
@@ -89,8 +89,8 @@ if (isset($_SESSION['admin'])) {
                                                 <div class="col-8">
                                                     <div class="card-body row">
                                                         <div class="form-group col-12">
-                                                            <label for="ho_ten">Tên QTV</label>
-                                                            <input value="<?= $taiKhoan['ho_ten'] ?>" name="ho_ten" type="text" class="form-control" id="ho_ten" placeholder="Nhập tên QTV">
+                                                            <label for="ho_ten">Tên tài khoản</label>
+                                                            <input value="<?= $taiKhoan['ho_ten'] ?>" name="ho_ten" type="text" class="form-control" id="ho_ten" placeholder="Nhập tên ">
                                                             <?php if (isset($_SESSION['errors']['ho_ten'])) { ?>
                                                                 <p class="text-danger"><?= $_SESSION['errors']['ho_ten'] ?></p>
                                                             <?php } ?>

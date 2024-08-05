@@ -47,8 +47,6 @@ class ListSanPham
         try {
             $sql = 'SELECT * FROM san_phams ORDER BY ngay_nhap DESC;
 ;
-;
-;
             ';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -61,9 +59,7 @@ class ListSanPham
         try {
             $sql = 'SELECT * FROM san_phams ORDER BY luot_xem DESC;
 ;
-;
-;
-            ';
+           ';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -71,6 +67,20 @@ class ListSanPham
             $this->debug($e);
         }
     }
+    public function getSanPhamTimKiem($tu_khoa){
+        try {
+            $sql = 'SELECT * FROM san_phams WHERE ten_san_pham LIKE :tu_khoa';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':tu_khoa' => '%' . $tu_khoa . '%'
+            ]);
+    
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
+    
     private function debug($e)
     {
         echo '<pre>';

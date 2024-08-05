@@ -142,7 +142,7 @@ if (isset($_SESSION['user'])) {
                                                                             <td><?= $dh['tong_tien'] ?></td>
                                                                             <td>
                                                                                 <a class="btn btn-success" href="<?= BASE_URL . '?act=chitiet-donhang&id_don_hang=' . $dh['id'] ?>">Chi tiết</a>
-                                                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin đơn hàng này ko?')" class="btn btn-danger" href="<?= BASE_URL . '?act=delete_itemlichdudonhang&id_don_hang=' . $dh['id'] ?>">Xóa</a>
+                                                                                
                                                                             </td>
                                                                         </tr>
 

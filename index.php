@@ -66,6 +66,7 @@ match ($act) {
     'locsanpham-thapcao' => (new ListSanPhamController())->locSanPhamThapCao(),
     'locsanpham-moinhat' => (new ListSanPhamController())->locSanPhamMoiNhat(),
     'locsanpham-phobien' => (new ListSanPhamController())->locSanPhamPhoBien(),
+    'timkiem-sanpham' => (new ListSanPhamController())->timKiemSanPham(),
 
 
 
@@ -98,5 +99,7 @@ match ($act) {
 
     'baiviet' => (new BaiVietController())->listBaiViet(),
     'chitiet-baiviet' => (new BaiVietController())->chiTietBaiViet(),
+    'listbaiviet-bytag' => (new BaiVietController())->listBaiVietByTag(),
+    'listbaiviet-bydanhmuc' => (new BaiVietController())->listBaiVietByDanhMuc(),
 
 };
