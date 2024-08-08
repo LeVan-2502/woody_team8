@@ -32,6 +32,9 @@ if (isset($_SESSION['user'])) {
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/assets/css/app.css" type="text/css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/ruper/assets/css/responsive.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -114,27 +117,25 @@ if (isset($_SESSION['user'])) {
                                                 <h4>Lịch sử mua hàng</h4>
                                                 <div class="tab-content" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="danhsach" role="tabpanel" aria-labelledby="danhsach-tab">
-                                                        <div class="table-responsive py-2 ">
-                                                            <table class="table">
+                                                        <div class="table-responsive py-2">
+                                                            <table id="donHangTable" class="table">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>STT</th>
-
                                                                         <th>Ngày đặt</th>
                                                                         <th>Trạng thái</th>
                                                                         <th>Phương thức thanh toán</th>
                                                                         <th>Tổng tiền</th>
                                                                         <th>Actions</th>
-
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($donHang as $key => $dh) : ?>
                                                                         <tr>
                                                                             <td><?= $key + 1 ?></td>
-
                                                                             <td><?= $dh['ngay_dat'] ?></td>
-                                                                            <td> <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>
+                                                                            <td>
+                                                                                <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>
                                                                                     <?= hienThiTrangThai($dh['trang_thai_id'], $dh['ten_trang_thai']); ?>
                                                                                 <?php endif; ?>
                                                                             </td>
@@ -142,10 +143,8 @@ if (isset($_SESSION['user'])) {
                                                                             <td><?= $dh['tong_tien'] ?></td>
                                                                             <td>
                                                                                 <a class="btn btn-success" href="<?= BASE_URL . '?act=chitiet-donhang&id_don_hang=' . $dh['id'] ?>">Chi tiết</a>
-                                                                                
                                                                             </td>
                                                                         </tr>
-
                                                                     <?php endforeach ?>
                                                                     <?php
                                                                     function hienThiTrangThai($trang_thai_id, $ten_trang_thai)
@@ -162,13 +161,12 @@ if (isset($_SESSION['user'])) {
                                                                     }
                                                                     ?>
                                                                 </tbody>
-
                                                             </table>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -651,6 +649,15 @@ if (isset($_SESSION['user'])) {
         }
         // ]]>
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#donHangTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>
+
 </body>
 
 <!-- Mirrored from caketheme.com/html/ruper/page-my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Jul 2024 00:53:39 GMT -->

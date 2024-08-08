@@ -33,57 +33,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;display=swap" rel="stylesheet">
     <style>
-        /* body{
-            background-color: #f5f1de;
+        body.hold-transition.login-page {
+            background: url('https://images.unsplash.com/photo-1468581264429-2548ef9eb732?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
         }
-         */
+        .card-header-custom {
+            background-color: #0068a9;
+            color: #fff;
+            text-align: center;
+        }
+        .card-body-custom {
+            background-color: #E7E8E7;
+        }
+        .card-header-info {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .badge-info {
+            background-color: #17a2b8;
+        }
+        .order-summary p {
+            margin-bottom: 0;
+        }
+        .order-summary p strong {
+            display: inline-block;
+            width: 200px;
+        }
         .order-summary {
             margin-top: 20px;
         }
-
-        .action-buttons {
-            margin-top: 20px;
-        }
-
-        .card-header {
-            font-weight: bold;
-            background-color: #4D555B;
-            color: #fff;
-        }
-
-        .card-header title {
-            background-color: #406346;
-        }
-
-        .table img {
-            max-width: 100px;
-        }
-
-        .container {
-            margin-top: 30px;
-        }
-
-        .card-body {
-            background-color: #fff;
+        .action-buttons .btn {
+            margin-left: 10px;
         }
     </style>
 </head>
 
 <body class="hold-transition login-page ">
 
-    <div class="container">
+<div class="container mt-5">
         <div class="card">
-            <div style="background-color: #152935;" class="card-header">
-                <h3 style="color:#fff; text-align: center;">Chi Tiết Đơn Hàng <strong><?= $donHang['ma_don_hang'] ?></strong></h3>
+            <div class="card-header card-header-custom">
+                <h3>Chi Tiết Đơn Hàng <strong><?= $donHang['ma_don_hang'] ?></strong></h3>
             </div>
 
-            <!-- Thông tin đơn hàng -->
-            <div style="background-color: #E7E8E7;" class="card-body father">
+            <div class="card-body card-body-custom">
                 <div class="row">
-                   
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header card-header-info">
                                 Thông tin đơn hàng
                             </div>
                             <div class="card-body">
@@ -94,10 +91,9 @@
                         </div>
                     </div>
 
-                    <!-- Thông tin giao hàng -->
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header card-header-info">
                                 Thông tin giao hàng
                             </div>
                             <div class="card-body">
@@ -109,9 +105,8 @@
                     </div>
                 </div>
 
-                <!-- Danh sách sản phẩm -->
                 <div class="card mt-4">
-                    <div class="card-header">
+                    <div class="card-header card-header-info">
                         Danh sách sản phẩm
                     </div>
                     <div class="card-body">
@@ -128,7 +123,7 @@
                             <tbody>
                                 <?php foreach ($chiTietDonHang as $item) : ?>
                                     <tr>
-                                        <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="Sản phẩm 1"></td>
+                                        <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="Sản phẩm 1" class="img-thumbnail" style="max-width: 100px;"></td>
                                         <td><?= $item['ten_san_pham'] ?></td>
                                         <td><?= $item['so_luong'] ?></td>
                                         <td><?= $item['gia_san_pham'] ?></td>
@@ -138,7 +133,6 @@
                             </tbody>
                         </table>
 
-                        <!-- Tổng cộng đơn hàng -->
                         <div class="order-summary text-right">
                             <?php
                             $to_tal = 0;
@@ -147,22 +141,24 @@
                                 $to_tal += $tong_tien;
                             }
                             ?>
-                            <p><strong>Tổng giá sản phẩm:</strong> <?= $to_tal ?></p>
+                            <p><strong>Tổng giá sản phẩm:</strong> <?= $to_tal ?> VNĐ</p>
                             <p><strong>Phí vận chuyển:</strong> 30,000 VNĐ</p>
-                            <p><strong>Áp dụng mã giảm giá:</strong> 30,000 VNĐ</p>
+                            <p><strong>Áp dụng mã giảm giá:</strong></p>
                             <p><strong>Tổng số tiền:</strong> <?= $to_tal + 30000 - 30000 ?> VNĐ</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="action-buttons text-right">
+
+            <div class="card-footer text-right">
+                <div class="action-buttons">
                     <a href="<?= BASE_URL ?>" class="btn btn-primary">Về trang chủ</a>
                     <a onclick="return confirm('Bạn có chắc chắn muốn hủy đơn không?')" href="<?= BASE_URL.'?act=huy-donhang&id_don_hang='.$donHang['id'] ?>" class="btn btn-danger">Hủy đơn hàng</a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Dependency Scripts -->
     <script src="<?= BASE_URL ?>assets/ruper/libs/popper/js/popper.min.js"></script>

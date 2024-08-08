@@ -87,7 +87,7 @@ if (isset($_SESSION['user'])) {
                                         </li>
                                         <li class="level-0 menu-item menu-item-has-children">
                                             <a href="<?= BASE_URL ?>?act=listsanpham"><span class="menu-item-text">Xem sản phẩm</span></a>
-                                            <ul class="sub-menu">
+                                            <!-- <ul class="sub-menu">
 
                                                 <li>
                                                     <a href="shop-details.html"><span class="menu-item-text">Nội thất phòng khách</span></a>
@@ -104,7 +104,7 @@ if (isset($_SESSION['user'])) {
                                                 <li>
                                                     <a href="shop-grid-left.html"><span class="menu-item-text">Sản phẩm khác</span></a>
                                                 </li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
                                         <li class="level-0 menu-item">
                                             <a href="<?= BASE_URL ?>?act=baiviet"><span class="menu-item-text">BÀI VIẾT</span></a>
@@ -136,22 +136,22 @@ if (isset($_SESSION['user'])) {
                                 </ul>
 
                                 <!-- Search -->
-                                <div class="search-box">
+                                <!-- <div class="search-box">
                                     <div class="search-toggle"><i class="icon-search"></i></div>
-                                </div>
+                                </div> -->
 
                                 <!-- Wishlist -->
-                                <div class="wishlist-box">
+                                <!-- <div class="wishlist-box">
                                     <a href="shop-wishlist.html"><i class="icon-heart"></i></a>
                                     <span class="count-wishlist">1</span>
-                                </div>
+                                </div> -->
 
                                 <!-- Cart -->
                                 <div class="ruper-topcart dropdown light">
                                     <div class="dropdown mini-cart top-cart">
                                         <div class="remove-cart-shadow"></div>
                                         <a class="dropdown-toggle cart-icon" href="<?=BASE_URL .'?act=list-giohang'?>" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <div class="icons-cart"><i class="icon-large-paper-bag"></i><span class="cart-count">2</span></div>
+                                            <div class="icons-cart"><i class="icon-large-paper-bag"></i></div>
                                         </a>
                                     </div>
                                 </div>

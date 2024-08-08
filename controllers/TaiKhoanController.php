@@ -123,6 +123,7 @@ class TaiKhoanController
         $donHang=$this->modelTaiKhoan->getThongTinĐonHang($id); 
         
         $chiTietDonHang = $this->modelTaiKhoan->getSanPhamDonHang($id);
+        
        
         require_once './views/taikhoan/chitietdonhang.php';
        

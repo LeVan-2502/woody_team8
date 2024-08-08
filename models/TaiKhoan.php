@@ -140,7 +140,7 @@ public function updateTrangThaiDonHang($id, $trang_thai_id)
     public function getSanPhamDonHang($id)
     {
         try {
-            $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.*, don_hangs.* , trang_thai_don_hangs.*
+            $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.ten_san_pham, san_phams.gia_san_pham,san_phams.hinh_anh, don_hangs.* , trang_thai_don_hangs.*
                     FROM chi_tiet_don_hangs
                     INNER JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
                     INNER JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
