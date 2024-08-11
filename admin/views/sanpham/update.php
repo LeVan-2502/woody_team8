@@ -36,21 +36,21 @@
                                         <p class="text-danger"><?= $errors['gia_khuyen_mai'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="so_luong">Số lượng</label>
                                     <input value="<?= $sanPham['so_luong'] ?>" name="so_luong" type="number" class="form-control" id="so_luong" placeholder="Nhập số lượng">
                                     <?php if (isset($errors['so_luong'])) { ?>
                                         <p class="text-danger"><?= $errors['so_luong'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="ngay_nhap">Ngày nhập</label>
                                     <input value="<?= $sanPham['ngay_nhap'] ?>" name="ngay_nhap" type="date" class="form-control" id="ngay_nhap">
                                     <?php if (isset($errors['ngay_nhap'])) { ?>
                                         <p class="text-danger"><?= $errors['ngay_nhap'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="danh_muc_id">Danh mục</label>
                                     <select name="danh_muc_id" id="danh_muc_id" class="form-control">
                                         <option selected disabled value="">Chọn danh mục sản phẩm</option>
@@ -62,17 +62,7 @@
                                         <p class="text-danger"><?= $errors['danh_muc_id'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label for="trang_thai">Trạng thái</label>
-                                    <select name="trang_thai" id="trang_thai" class="form-control">
-                                        <option selected disabled value="">Chọn trạng thái sản phẩm</option>
-                                        <option value="1" <?= $sanPham['trang_thai'] == 1 ? 'selected' : '' ?>>Còn bán</option>
-                                        <option value="2" <?= $sanPham['trang_thai'] == 2 ? 'selected' : '' ?>>Dừng bán</option>
-                                    </select>
-                                    <?php if (isset($errors['trang_thai'])) { ?>
-                                        <p class="text-danger"><?= $errors['trang_thai'] ?></p>
-                                    <?php } ?>
-                                </div>
+                               
                                 <div class="form-group col-12">
                                     <label for="mo_ta">Mô tả</label>
                                     <textarea name="mo_ta" class="form-control" id="mo_ta" placeholder="Nhập mô tả"><?= $sanPham['mo_ta'] ?></textarea>

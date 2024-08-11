@@ -117,6 +117,24 @@ class OnlineCheckout {
             $this->debug($e);
         }
     }
+    public function updateTrangThaiSanPham($id)
+{
+    try {
+        // Sửa lỗi so sánh trong câu lệnh SQL
+        $sql = '
+            UPDATE san_phams SET trang_thai = 0
+            WHERE id = :id
+        ';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':id' => $id
+        ]);
+    } catch (\Exception $e) {
+        // Gọi phương thức debug để xử lý lỗi
+        $this->debug($e);
+    }
+}
+
     public function getSoLuongSanPhams($id)
     {
         try {
@@ -195,6 +213,7 @@ class OnlineCheckout {
         $this->debug($e);
     }
 }
+
 
     
     private function debug($e)

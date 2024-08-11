@@ -69,6 +69,12 @@ if(isset($_SESSION['admin'])) {
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN ?>?act=het-sanpham" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hết hàng</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?= BASE_URL_ADMIN ?>?act=them-sanpham" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm mới</p>

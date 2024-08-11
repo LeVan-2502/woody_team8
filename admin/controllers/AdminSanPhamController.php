@@ -16,6 +16,15 @@ class AdminSanPhamController
 
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }
+    public function danhSachHetSanPham()
+    {
+        $view = 'sanpham/hethang';
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+
+        $listSanPham = $this->modelSanPham->getAllSanPhamHetHang();
+
+        require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
+    }
     public function formThemSanPham()
     {
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
@@ -149,7 +158,12 @@ class AdminSanPhamController
             $so_luong = $_POST['so_luong'];
             $ngay_nhap = $_POST['ngay_nhap'];
             $danh_muc_id = $_POST['danh_muc_id'];
-            $trang_thai = $_POST['trang_thai'];
+            if($so_luong==1){
+                $trang_thai =2; 
+            }else{
+                $trang_thai =1; 
+            }
+           
             $mo_ta = $_POST['mo_ta'];
 
             $hinh_anh = $_FILES['hinh_anh'];

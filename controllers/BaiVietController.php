@@ -8,6 +8,7 @@ class BaiVietController
         $this->modelBaiViet= new BaiViet();
     }
     public function listBaiViet(){
+        $bonBaiVietGanDay = [];
         $title = '';
         $countSanPhamDanhMuc=$this->modelBaiViet->countSanPhamDanhMuc();
        

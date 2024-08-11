@@ -64,6 +64,7 @@ match ($act) {
     'them-sanpham' =>(new AdminSanPhamController())->postThemSanPham(),
     'form-them-sanpham' =>(new AdminSanPhamController())->formThemSanPham(),
     'sua-sanpham' =>(new AdminSanPhamController())->postSuaSanPham(),
+    'het-sanpham' =>(new AdminSanPhamController())->danhSachHetSanPham(),
     'form-sua-sanpham' =>(new AdminSanPhamController())->formSuaSanPham(),
     'xoa-sanpham' =>(new AdminSanPhamController())->deleteSanPham(),
     'sua-albumsanpham' =>(new AdminSanPhamController())->formAlbumSanPham(),

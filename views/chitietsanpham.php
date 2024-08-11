@@ -41,14 +41,14 @@ if (isset($_SESSION['user'])) {
 
 <body class="shop">
 	<div id="page" class="hfeed page-wrapper">
-	<?php
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            require_once './views/layouts/partials/headerdangnhap.php';
-        } else {
-            require_once './views/layouts/partials/header.php';
-        }
-        ?>
+		<?php
+		if (isset($_SESSION['user'])) {
+			$user = $_SESSION['user'];
+			require_once './views/layouts/partials/headerdangnhap.php';
+		} else {
+			require_once './views/layouts/partials/header.php';
+		}
+		?>
 
 		<div id="site-main" class="site-main">
 			<div id="main-content" class="main-content">
@@ -106,16 +106,17 @@ if (isset($_SESSION['user'])) {
 
 											<div class="product-info col-lg-5 col-md-12 col-12 ">
 												<h1 class="title"><?= $chiTietSanPham['ten_san_pham'] ?></h1>
+												
 												<span class="price">
-													<del aria-hidden="true"><span>$<?= $chiTietSanPham['gia_san_pham'] ?></span></del>
-													<ins><span>$<?= $chiTietSanPham['gia_khuyen_mai'] ?></span></ins>
+													
+													<del aria-hidden="true">
+														<span><?= number_format($chiTietSanPham['gia_san_pham']) ?> VND</span>
+													</del>
+													<ins>
+														<span><?= number_format($chiTietSanPham['gia_khuyen_mai']) ?> VND</span>
+													</ins>
 												</span>
-												<div class="rating">
-													<div class="star star-5"></div>
-													<div class="review-count">
-														(3<span> reviews</span>)
-													</div>
-												</div>
+												
 
 												<!-- Mô tả -->
 												<div class="description">
@@ -124,7 +125,7 @@ if (isset($_SESSION['user'])) {
 
 
 												<div class="buttons">
-													<form action="<?= BASE_URL . '?act=add-giohang&san_pham_id='.  $chiTietSanPham['id'] ?>" method="post">
+													<form action="<?= BASE_URL . '?act=add-giohang&san_pham_id=' .  $chiTietSanPham['id'] ?>" method="post">
 														<input type="hidden" name="id" value="<?= $chiTietSanPham['id'] ?>">
 														<div class="add-to-cart-wrap">
 															<div class="quantity">
@@ -132,31 +133,35 @@ if (isset($_SESSION['user'])) {
 																<input type="number" class="qty" step="1" min="0" max="<?= $chiTietSanPham['so_luong'] ?>" name="so_luong" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
 																<button type="button" class="minus">-</button>
 															</div>
+															<?php
+																// Kiểm tra trạng thái sản phẩm
+																if ($chiTietSanPham['trang_thai'] === 1) {
+																	// Hiển thị giá cũ và giá khuyến mãi nếu còn hàng
+																	echo '<button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button>';
+																} else {
+																	// Hiển thị nút "Hết hàng" nếu hết hàng
+																	echo '<button type="button" class="btn btn-danger">Hết hàng</button>';
+																}
+																?>
 
-															<button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button>
+															
 
 														</div>
 													</form>
-													<div class="btn-quick-buy" data-title="Wishlist">
-														<button class="product-btn">Mua ngay</button>
-													</div>
-													<div class="btn-wishlist" data-title="Wishlist">
+													<br>
+													<!-- <div class="btn-wishlist" data-title="Wishlist">
 														<button class="product-btn">Thêm vào yêu thich</button>
 													</div>
 													<div class="btn-compare" data-title="Compare">
 														<button class="product-btn">Sản phẩm liên quan</button>
-													</div>
+													</div> -->
 												</div>
 												<div class="product-meta">
-													<span class="sku-wrapper">SKU: <span class="sku"><?= $chiTietSanPham['id'] ?></span></span>
-													<span class="posted-in">Category: <a href="shop-grid-left.html" rel="tag"><?= $chiTietSanPham['ten_danh_muc'] ?></a></span>
+													<span class="sku-wrapper">ID sản phẩm:  <span class="sku"><?= $chiTietSanPham['id'] ?></span></span>
+													<span class="posted-in">Danh mục: <a href="shop-grid-left.html" rel="tag"><?= $chiTietSanPham['ten_danh_muc'] ?></a></span>
 
 												</div>
-												<div class="social-share">
-													<a href="#" title="Facebook" class="share-facebook" target="_blank"><i class="fa fa-facebook"></i>Facebook</a>
-													<a href="#" title="Twitter" class="share-twitter"><i class="fa fa-twitter"></i>Twitter</a>
-													<a href="#" title="Pinterest" class="share-pinterest"><i class="fa fa-pinterest"></i>Pinterest</a>
-												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -170,11 +175,9 @@ if (isset($_SESSION['user'])) {
 												<li class="nav-item">
 													<a class="nav-link active" data-toggle="tab" href="#description" role="tab">MÔ TẢ CHI TIẾT</a>
 												</li>
+												
 												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#additional-information" role="tab">THÔNG TIN CHI TIẾT</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">ĐÁNH GIÁ (1)</a>
+													<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">BÌNH LUẬN SẢN PHẨM</a>
 												</li>
 											</ul>
 											<div class="tab-content">
@@ -223,8 +226,8 @@ if (isset($_SESSION['user'])) {
 															<div id="respond" class="comment-respond">
 																<span id="reply-title" class="comment-reply-title">Đánh giá sản phẩm</span>
 																<form action="<?= BASE_URL . '?act=post-binhluan' ?>" method="post" id="comment-form" class="comment-form">
-																	<input type="hidden" name="san_pham_id" value="<?=$chiTietSanPham['id']?>">
-																	<input type="hidden" name="tai_khoan_id" value="<?=$user['id']?>">
+																	<input type="hidden" name="san_pham_id" value="<?= $chiTietSanPham['id'] ?>">
+																	<input type="hidden" name="tai_khoan_id" value="<?= $user['id'] ?>">
 																	<p class="comment-form-comment">
 																		<textarea id="noi_dung" name="noi_dung" placeholder="Ý kiến của bạn về sản phẩm *" cols="45" rows="8" aria-required="true" required=""></textarea>
 																	</p>
@@ -281,29 +284,24 @@ if (isset($_SESSION['user'])) {
 																				<div class="hot">Hot</div>
 																			</div>
 																			<div class="product-thumb-hover">
-																				<a href="shop-details.html">
-																					<img width="600" height="600" src="<?= $sp['hinh_anh'] ?>" class="post-image" alt="">
-																					<img width="600" height="600" src="<?= $listAnh[1]['link_hinh_anh'] ?? null ?>" class="hover-image back" alt="">
+																				<a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=0'.$sp['id']?>">
+																					<img width="600" height="600" src="<?= $sp['hinh_anh'] ?>" alt="">
+
 																				</a>
 																			</div>
 																			<div class="product-button">
-																				<div class="btn-add-to-cart" data-title="">
-																					<a rel="nofollow" href="<?= BASE_URL . '?act=list-giohang' ?>" class="product-btn button">Thêm vào giỏ hàng</a>
+																				<div class="btn-add-to-cart" data-title="Add to cart">
+
+																					<a href="<?= BASE_URL . '?act=add-giohang&san_pham_id='.$sp['id'] ?>" class="added-to-cart product-btn" title="Thêm vào giỏ hàng" tabindex="0">Thêm vào giỏ hàng</a>
 																				</div>
-																				<div class="btn-wishlist" data-title="Wishlist">
-																					<button class="product-btn">Thêm vào yêu thích</button>
-																				</div>
-																				<div class="btn-compare" data-title="Compare">
-																					<button class="product-btn">Sản phẩm liên quan</button>
-																				</div>
-																				<span class="product-quickview" data-title="Quick View">
-																					<a href="#" class="quickview quickview-button">Xem chi tiêt<i class="icon-search"></i></a>
+																				<span class="product-quickview" data-title="">
+																					<a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=0'.$sp['id']?>" class="quickview quickview-button">Xem chi tiêt<i class="icon-search"></i></a>
 																				</span>
 																			</div>
 																		</div>
 																		<div class="products-content">
 																			<div class="contents text-center">
-																				<h3 class="product-title"><a href="shop-details.html"><?= $sp['ten_san_pham'] ?></a></h3>
+																				<h3 class="product-title"><a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=0'.$sp['id']?>"><?= $sp['ten_san_pham'] ?></a></h3>
 
 																				<span class="price"><?= $sp['gia_san_pham'] ?></span>
 																			</div>

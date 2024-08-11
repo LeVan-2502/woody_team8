@@ -20,24 +20,12 @@ class ChiTietSanPhamController
         
         $this->modelChiTietSanPham->updateLuotView($id);
         $sanPhamLienQuan = $this->modelChiTietSanPham->sanPhamLienQuan($danh_muc_id);
+        
         require_once './views/chitietsanpham.php';
         unset($_SESSION['errors']);
     }
 
-    public function chiXem()
-    {
-
-        $id = $_GET['id_san_pham'];
-        $chiTietSanPham = $this->modelChiTietSanPham->getChiTietSanPham($id);
-        $listAnh =  $this->modelChiTietSanPham->getAlbumSanPham($id);
-
-        $danh_muc_id = $chiTietSanPham['danh_muc_id'];
-        $binhLuan = $this->modelChiTietSanPham->getAllBinhLuanSanPham($id);
-
-        $this->modelChiTietSanPham->updateLuotView($id);
-        $sanPhamLienQuan = $this->modelChiTietSanPham->sanPhamLienQuan($danh_muc_id);
-        require_once './views/nguoixem/chitietsanpham.php';
-    }
+    
     public function postBinhLuan(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

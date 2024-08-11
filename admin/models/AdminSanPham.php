@@ -21,6 +21,21 @@ class AdminSanPham
             $this->debug($e);
         }
     }
+    public function getAllSanPhamHetHang()
+    {
+        try {
+            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc 
+            FROM san_phams
+            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+            WHERE san_phams.trang_thai=0
+            ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            $this->debug($e);
+        }
+    }
     public function getAllSanPhamByDanhMuc($id)
     {
         try {

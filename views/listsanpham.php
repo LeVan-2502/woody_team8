@@ -431,6 +431,7 @@ if (isset($_SESSION['user'])) {
             </div>
         </div>
 
+       
         <!-- Page Loader -->
         <div class="page-preloader">
             <div class="loader">
@@ -486,12 +487,15 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="product-button">
                             <div class="btn-add-to-cart" data-title="Add to cart">
-                                
-                                <a href="<?= BASE_URL . '?act=add-giohang&san_pham_id=${product.id}' ?>" class="added-to-cart product-btn" title="View cart" tabindex="0">View cart</a>
+                             <a href="${product.trang_thai === 1 ? '<?= BASE_URL . '?act=add-giohang&san_pham_id=' ?>' + product.id : '#'}" 
+                               class="added-to-cart product-btn" 
+                               title="${product.trang_thai === 1 ? 'View cart' : 'Unavailable'}" 
+                               tabindex="0"
+                               ${product.trang_thai !== 1 ? 'aria-disabled="true" style="pointer-events: none; opacity: 0.5;"' : ''}>
+                                ${product.trang_thai === 1 ? 'View cart' : 'Unavailable'}
+                            </a>
                             </div>
-                            <div class="btn-wishlist" data-title="Wishlist">
-                                <button class="product-btn">Thêm vào yêu thích</button>
-                            </div>
+                            
                             <div class="btn-compare" data-title="Compare">
                                 <button class="product-btn">Compare</button>
                             </div>
@@ -501,12 +505,16 @@ if (isset($_SESSION['user'])) {
                     <div class="products-content">
                         <div class="contents text-center">
                             <h3 class="product-title"><a href="<?= BASE_URL . '?act=chitietsanpham&id_san_pham=${product.id}' ?>">${product.ten_san_pham}</a></h3>
-                            <span class="price">$${product.gia_san_pham}</span>
+                             ${product.trang_thai === 1 
+                                ? `<span class="price"><del>${Number(product.gia_khuyen_mai).toLocaleString()} VND</del></span>
+                                   <span class="price"><strong>${Number(product.gia_san_pham).toLocaleString()} VND</strong></span>`
+                                : `<button class="btn btn-danger">Hết hàng</button>`
+                            }
                         </div>
                     </div>
                 </div>
                 </div>
-    `;
+                 `;
                     dataContainer.innerHTML += productElement;
                 }
             }

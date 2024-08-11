@@ -284,9 +284,13 @@ class OnlineCheckoutController
             $soLuong = (int) $soLuong;
             $qty = (int) $qty;
             $so_luong = $soLuong - $qty;
+            if($so_luong==1){
+                $this->modelOnlineCheckout->updateTrangThaiSanPham($item['id']);
+            }
             $this->modelOnlineCheckout->updateSoLuongSanPhams($item['id'], $so_luong);
         }
     }
+    
     public function generateOrderCode()
     {
         $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

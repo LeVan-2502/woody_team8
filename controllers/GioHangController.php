@@ -155,6 +155,7 @@ class GioHangController
 
             // Cập nhật số lượng trong cơ sở dữ liệu
             $this->modelGioHang->updateSoLuongSanPhamGioHang($gio_hang_id, $san_pham_id, $qty);
+            
         }
 
 
