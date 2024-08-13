@@ -61,11 +61,11 @@
                                                         	<h3 class="text-center">ĐẶT LẠI MẬT KHẨU</h3>
 															<div class="form-group mt-4 ">
 															<label for="username">Nhập mật khẩu mới <span class="text-danger">*</span></label>
-																<input  type="text" class="form-control" name="mat_khau_reset" id="mat_khau" required>
+																<input  type="password" class="form-control" name="mat_khau_reset" id="mat_khau" required>
 															</div>
 															<div class="form-group">
 															<label for="username">Xác nhận mật khẩu mới <span class="text-danger">*</span></label>		
-																<input type="text" class="form-control" name="mat_khau_xacnhan" id="email" required>
+																<input type="password" class="form-control" name="mat_khau_xacnhan" id="email" required>
 															</div>																					
 															<?php if (isset($_SESSION['errors']['mat_khau'])) { ?>
 																<span class="text-danger"><?= $_SESSION['errors']['mat_khau'] ?></span>

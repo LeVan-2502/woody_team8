@@ -93,6 +93,40 @@ class OnlineCheckout {
             $this->debug($e);
         }
     }
+    public function insertThanhToanOnline($maGiaoDich, $trangThai, $soTien, $ngayGio, $thongTinDonHang)
+{
+    try {
+        $sql = 'INSERT INTO thanh_toan_online (
+                ma_giao_dich, 
+                trang_thai, 
+                so_tien, 
+                ngay_gio, 
+                thong_tin_don_hang
+            ) VALUES (
+                :ma_giao_dich, 
+                :trang_thai, 
+                :so_tien, 
+                :ngay_gio, 
+                :thong_tin_don_hang
+            )';
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->execute([
+            ':ma_giao_dich' => $maGiaoDich,
+            ':trang_thai' => $trangThai,
+            ':so_tien' => $soTien,
+            ':ngay_gio' => $ngayGio,
+            ':thong_tin_don_hang' => $thongTinDonHang
+        ]);
+        
+        return $this->conn->lastInsertId(); // Lấy ID của bản ghi mới chèn (nếu cần)
+    } catch (\Exception $e) {
+        // Xử lý lỗi hoặc ghi lại thông tin lỗi
+        $this->debug($e);
+    }
+}
+
     public function getCartID($tai_khoan_id)
     {
         $cart = $this->getCartByUserID($tai_khoan_id);

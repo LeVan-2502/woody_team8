@@ -9,14 +9,7 @@ class GioHang
     public function showOneSanPham($id)
 {
     try {
-        $sql = 'SELECT sp.id,
-                     sp.ten_san_pham,
-                     sp.gia_khuyen_mai,
-                     sp.hinh_anh,
-                     sp.gia_san_pham,
-                     sp.ngay_nhap,
-                     sp.mo_ta,
-                     sp.trang_thai
+        $sql = 'SELECT sp.*
                 FROM san_phams sp
                 WHERE sp.id = :id'; // Sửa mệnh đề WHERE
         $stmt = $this->conn->prepare($sql);

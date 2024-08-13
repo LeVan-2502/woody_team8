@@ -63,7 +63,19 @@
                         <div class="section-padding">
                             <div class="section-container p-l-r">
                                 <div class="shop-cart">
+                                    
                                     <div class="row">
+                                    <div class="col-12">
+                                                <?php if (isset($_SESSION['thongbao'])) : ?>
+                                                    <div class="alert alert-<?= $_SESSION['thongbao']['type'] ?> alert-dismissible fade show" role="alert">
+                                                        <?= $_SESSION['thongbao']['message'] ?>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <?php unset($_SESSION['thongbao']); ?>
+                                                <?php endif ?>
+                                            </div>
                                         <div class="col-xl-8 col-lg-12 col-md-12 col-12">
                                             <form class="cart-form" action="<?= BASE_URL . '?act=capnhat-giohang' ?>" method="post">
                                                 <div class="table-responsive">
@@ -101,7 +113,7 @@
                                                                         </div>
                                                                     </td>
                                                                     <td class="product-price">
-                                                                        <span class="price"><?= $sp['gia_san_pham'] ?></span>
+                                                                        <span class="price"><?= number_format($sp['gia_san_pham']) ?>VND</span>
                                                                     </td>
                                                                     <td class="product-quantity">
                                                                         <div class="quantity">
@@ -111,7 +123,7 @@
                                                                         </div>
                                                                     </td>
                                                                     <td class="product-subtotal">
-                                                                        <span>$<?= number_format($tong_tien, 2) ?></span>
+                                                                        <span><?= number_format($tong_tien) ?>VND</span>
                                                                     </td>
                                                                     <td>
                                                                         <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="<?= BASE_URL . '?act=del-giohang&san_pham_id=' . $sp['id'] ?>">Xóa</a>
@@ -158,7 +170,7 @@
                                                     </div>
                                                     <div class="cart-subtotal">
                                                         <div class="title">Phí giao hàng</div>
-                                                        <div><span><?= number_format(30000) ?> VND</span></div>
+                                                        <div><span><?= number_format(200000) ?> VND</span></div>
                                                     </div>
                                                     <div class="cart-subtotal">
                                                         <div class="title">Mã giảm giá đã chọn</div>
@@ -178,7 +190,7 @@
                                                 <?php
                                                 
                                                 // Khai báo biến phí giao hàng
-                                                $shipping_fee = 30000;
+                                                $shipping_fee = 200000;
                                                 // Tính toán tổng tiền sau khi áp dụng mã giảm giá
                                                 if($gioHang['khuyen_mai_id']==0){
                                                     $gioHang['gia_trị'] = 0;

@@ -18,13 +18,32 @@ class OnlineCheckoutController
     public function formThank()
 
     {
+        
         $id=$this-> modelOnlineCheckout->getLastDonHangID();
         require_once './views/giohang/thank.php';
     }
     public function formXacNhan()
 
     {
+        $ma_giao_dich = isset($_GET['vnp_TransactionNo']) ? $_GET['vnp_TransactionNo'] : '';
+       
+        $trang_thai = isset($_GET['vnp_TransactionStatus']) ? $_GET['vnp_TransactionStatus'] : '';
+        $so_tien = isset($_GET['vnp_Amount']) ? $_GET['vnp_Amount'] : '';
+        $ngay_gio = isset($_GET['vnp_PayDate']) ? $_GET['vnp_PayDate'] : '';
+        $thong_tin_don_hang = isset($_GET['vnp_OrderInfo']) ? $_GET['vnp_OrderInfo'] : '';
+        
+
+        // Chuyển đổi định dạng ngày giờ từ chuỗi YYYYMMDDHHMMSS thành định dạng DATETIME
+        if (strlen($ngay_gio) === 14) {
+            $ngay_gio = substr($ngay_gio, 0, 4) . '-' . substr($ngay_gio, 4, 2) . '-' . substr($ngay_gio, 6, 2) . ' ' . substr($ngay_gio, 8, 2) . ':' . substr($ngay_gio, 10, 2) . ':' . substr($ngay_gio, 12, 2);
+        }
+        
+        $this-> modelOnlineCheckout->insertThanhToanOnline($ma_giao_dich,$trang_thai,$so_tien, $ngay_gio, $thong_tin_don_hang);
+        
         $this->checkoutOnline();
+        // Lấy dữ liệu từ URL
+        
+
         $id=$this-> modelOnlineCheckout->getLastDonHangID();
         require_once './views/giohang/thankxacnhan.php';
     }

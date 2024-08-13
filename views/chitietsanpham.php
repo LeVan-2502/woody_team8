@@ -200,6 +200,7 @@ if (isset($_SESSION['user'])) {
 														<div id="comments">
 															<h2 class="reviews-title"><span><?= $chiTietSanPham['ten_san_pham'] ?></span></h2>
 															<ol class="comment-list">
+															
 																<?php foreach ($binhLuan as $bl) : ?>
 																	<li class="review">
 																		<div class="content-comment-container">

@@ -21,7 +21,7 @@
 
                         <h2>
                             <i class="fas fa-globe"></i>
-                            Thông tin chi tiết đơn hàng
+                            Thông tin chi tiết đơn hàng <strong><?= $dh['ma_don_hang'] ?></strong>
                         </h2>
                     </div>
 

@@ -17,6 +17,8 @@ class ChiTietSanPhamController
 
         $danh_muc_id = $chiTietSanPham['danh_muc_id'];
         $binhLuan = $this->modelChiTietSanPham->getAllBinhLuanSanPham($id);
+
+        
         
         $this->modelChiTietSanPham->updateLuotView($id);
         $sanPhamLienQuan = $this->modelChiTietSanPham->sanPhamLienQuan($danh_muc_id);

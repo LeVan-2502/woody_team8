@@ -154,7 +154,7 @@ if(isset($_SESSION['user'])) {
                                                         <div class="cart-subtotal">
                                                             <h2>Tổng tiền</h2>
                                                             <div class="subtotal-price">
-                                                                <span>$<?=$_SESSION['tong_tien']?></span>
+                                                                <span><?=number_format($_SESSION['tong_tien'])?>VND</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group ">

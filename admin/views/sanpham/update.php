@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="so_luong">Số lượng</label>
-                                    <input value="<?= $sanPham['so_luong'] ?>" name="so_luong" type="number" class="form-control" id="so_luong" placeholder="Nhập số lượng">
+                                    <input value="<?= $sanPham['so_luong'] ?>" name="so_luong" type="text" class="form-control" id="so_luong" placeholder="Nhập số lượng">
                                     <?php if (isset($errors['so_luong'])) { ?>
                                         <p class="text-danger"><?= $errors['so_luong'] ?></p>
                                     <?php } ?>

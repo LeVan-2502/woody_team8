@@ -158,12 +158,13 @@ class AdminSanPhamController
             $so_luong = $_POST['so_luong'];
             $ngay_nhap = $_POST['ngay_nhap'];
             $danh_muc_id = $_POST['danh_muc_id'];
+
             if($so_luong==1){
-                $trang_thai =2; 
+                $trang_thai =0; 
             }else{
                 $trang_thai =1; 
             }
-           
+            
             $mo_ta = $_POST['mo_ta'];
 
             $hinh_anh = $_FILES['hinh_anh'];
@@ -206,9 +207,7 @@ class AdminSanPhamController
             if (empty($danh_muc_id)) {
                 $errors['danh_muc_id'] = 'Loại danh mục không được để trống';
             }
-            if (empty($trang_thai)) {
-                $errors['trang_thai'] = 'Trạng thái phải chọn';
-            }
+            
             if (empty($mo_ta)) {
                 $errors['mo_ta'] = 'Mô tả không được để trống';
             }

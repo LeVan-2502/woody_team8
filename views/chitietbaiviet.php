@@ -81,9 +81,7 @@
             /* Căn giữa văn bản trong phần tử */
         }
 
-        .icon_clock_alt {
-            /* Nếu bạn cần thêm kiểu cho biểu tượng */
-        }
+        
 
         /* Tùy chỉnh thêm cho tiêu đề và ngày tháng */
         .post-categories a,
@@ -159,6 +157,7 @@
                                     <div class="post-content-entry">
                                         <div class="tags-links">
                                             <label>Tags :</label> 
+                                           
                                             <?php foreach($listTagBV as $tag):?>
                                             <a href="blog-grid-right.html" rel="tag"><?= $tag['ten_tag']; ?></a>
                                                 <?php endforeach?>

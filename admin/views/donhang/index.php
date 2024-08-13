@@ -34,6 +34,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th>STT</th>
                     <th>Mã đơn hàng</th>
                     <th>Tên người nhận</th>
                     <th>Tên tài khoản</th>
@@ -49,6 +50,7 @@
                   <?php foreach ($listDonHang as $key => $donhang) : ?>
                     <tr>
                       <td class="align-middle"><?= $key + 1 ?></td>
+                      <td class="align-middle"><?= $donhang['ma_don_hang'] ?></td>
                       <td class="align-middle"><?= $donhang['ho_ten'] ?></td>
                       <td class="align-middle"><?= $donhang['ten_nguoi_nhan'] ?></td>
                       <td class="align-middle"><?= $donhang['ngay_dat'] ?></td>
@@ -83,6 +85,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
+                  <th>STT</th>
                     <th>Mã đơn hàng</th>
                     <th>Tên khách hàng</th>
                     <th>ID người nhận</th>

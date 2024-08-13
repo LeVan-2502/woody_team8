@@ -122,6 +122,7 @@ if (isset($_SESSION['user'])) {
                                                                 <thead>
                                                                     <tr>
                                                                         <th>STT</th>
+                                                                        <th>Mã đơn</th>
                                                                         <th>Ngày đặt</th>
                                                                         <th>Trạng thái</th>
                                                                         <th>Phương thức thanh toán</th>
@@ -133,6 +134,7 @@ if (isset($_SESSION['user'])) {
                                                                     <?php foreach ($donHang as $key => $dh) : ?>
                                                                         <tr>
                                                                             <td><?= $key + 1 ?></td>
+                                                                            <td><?= $dh['ma_don_hang'] ?></td>
                                                                             <td><?= $dh['ngay_dat'] ?></td>
                                                                             <td>
                                                                                 <?php if (isset($dh['trang_thai_id']) && isset($dh['ten_trang_thai'])) : ?>

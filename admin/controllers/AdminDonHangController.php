@@ -25,7 +25,7 @@ class AdminDonHangController
        
        
         $sanPhamDonHang =$this->modelDonHang->getSanPhamDonHang($id_don_hang);
-    
+        
         $view = 'donhang/detail';
         require_once  PATH_VIEW_ADMIN . 'layouts/master.php';
     }

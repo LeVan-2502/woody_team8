@@ -1,3 +1,7 @@
+<?php
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,6 +125,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <?php foreach ($chiTietDonHang as $item) : ?>
                                     <tr>
                                         <td><img src="<?= BASE_URL . $item['hinh_anh'] ?>" alt="Sản phẩm 1" class="img-thumbnail" style="max-width: 100px;"></td>
@@ -130,6 +135,7 @@
                                         <td><?= $item['so_luong'] * $item['gia_san_pham'] ?></td>
                                     </tr>
                                 <?php endforeach ?>
+                                
                             </tbody>
                         </table>
 
@@ -142,9 +148,9 @@
                             }
                             ?>
                             <p><strong>Tổng giá sản phẩm:</strong> <?= $to_tal ?> VNĐ</p>
-                            <p><strong>Phí vận chuyển:</strong> 30,000 VNĐ</p>
+                            <p><strong>Phí vận chuyển:</strong> 200,000 VNĐ</p>
                             <p><strong>Áp dụng mã giảm giá:</strong></p>
-                            <p><strong>Tổng số tiền:</strong> <?= $to_tal + 30000 - 30000 ?> VNĐ</p>
+                            <p><strong>Tổng số tiền:</strong> <?= $to_tal + 200000   ?> VNĐ</p>
                         </div>
                     </div>
                 </div>
@@ -152,8 +158,13 @@
 
             <div class="card-footer text-right">
                 <div class="action-buttons">
-                    <a href="<?= BASE_URL ?>" class="btn btn-primary">Về trang chủ</a>
-                    <a onclick="return confirm('Bạn có chắc chắn muốn hủy đơn không?')" href="<?= BASE_URL.'?act=huy-donhang&id_don_hang='.$donHang['id'] ?>" class="btn btn-danger">Hủy đơn hàng</a>
+                    <a href="<?= BASE_URL .'?act=myaccount&id_tai_khoan='.$user['id']?>" class="btn btn-primary">Về trang cá nhân</a>
+                    <?php
+                        // Giả sử trạng thái đơn hàng được lưu trong biến $donHang['trang_thai']
+                        if ($donHang['trang_thai_id'] !==4) {
+                            echo '<a onclick="return confirm(\'Bạn có chắc chắn muốn hủy đơn không?\')" href="' . BASE_URL . '?act=huy-donhang&id_don_hang=' . $donHang['id'] . '" class="btn btn-danger">Hủy đơn hàng</a>';
+                        }
+                        ?>
                 </div>
             </div>
         </div>
